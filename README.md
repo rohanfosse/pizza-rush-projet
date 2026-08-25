@@ -10,6 +10,18 @@ qu'elle est rapide.
 
 **Le sujet complet, avec les regles du jeu et les ressources : [SUJET.md](SUJET.md).**
 
+## Le projet en ligne
+
+Le sujet, le jeu et les tests sont publies avec GitHub Pages, sans rien installer :
+
+- le sujet : https://rohanfosse.github.io/pizza-rush-projet/sujet.html
+- le jeu : https://rohanfosse.github.io/pizza-rush-projet/
+- les tests : https://rohanfosse.github.io/pizza-rush-projet/tests.html
+
+La version en ligne montre l'etat de depart : le jeu s'arrete sur la premiere
+fonction non ecrite, et les 43 tests sont rouges. C'est normal, c'est le point
+de depart. Pour travailler, clonez le depot et lancez tout chez vous.
+
 ## Recuperer le projet
 
 ```bash
