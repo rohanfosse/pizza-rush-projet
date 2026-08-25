@@ -5,6 +5,10 @@
 /* ------------------------------------------------------------------ jetons */
 
 :root {
+  /* Une seule palette, claire, quel que soit le reglage du systeme : le projet
+     est un document de cours, il doit avoir la meme tete pour tout le monde. */
+  color-scheme: light;
+
   --papier: #fbfbf8;
   --surface: #ffffff;
   --creux: #f4f4ee;
@@ -20,36 +24,6 @@
   --titre: "Bitter", Georgia, "Times New Roman", serif;
   --texte: "Source Serif 4", Georgia, "Times New Roman", serif;
   --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --papier: #11150f;
-    --surface: #181d16;
-    --creux: #1d231b;
-    --encre: #e6eae1;
-    --discret: #98a296;
-    --filet: #29312a;
-    --vert: #83ba97;
-    --vert-clair: #6f9f83;
-    --vert-pale: #1e2a21;
-    --mur: #2c332c;
-    --alerte: #d98b6d;
-  }
-}
-
-:root[data-theme="dark"] {
-  --papier: #11150f;
-  --surface: #181d16;
-  --creux: #1d231b;
-  --encre: #e6eae1;
-  --discret: #98a296;
-  --filet: #29312a;
-  --vert: #83ba97;
-  --vert-clair: #6f9f83;
-  --vert-pale: #1e2a21;
-  --mur: #2c332c;
-  --alerte: #d98b6d;
 }
 
 /* ------------------------------------------------------------------ socle */
