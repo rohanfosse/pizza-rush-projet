@@ -3,54 +3,1879 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Pizza Rush</title>
+    <title>Pizza Rush, le sujet</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
     <link
       rel="icon"
       href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='5' fill='%232f6b4f'/><text x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-size='20' fill='%23ffffff'>P</text></svg>"
     />
   </head>
-  <body>
-    <header>
-      <h1>Pizza Rush</h1>
-      <p class="sous-titre">Trois coursiers, un quartier, et des pizzas qui refroidissent.</p>
+  <body class="page-sujet">
+    <header class="barre">
+      <div class="dedans">
+        <a class="marque" href="index.html">Pizza Rush</a>
+        <nav>
+          <a href="index.html" aria-current="page">Le sujet</a>
+          <a href="jeu.html">Le jeu</a>
+          <a href="tests.html">Les tests</a>
+        </nav>
+      </div>
     </header>
 
-    <div id="score" class="score"></div>
+<div class="page">
+  <header class="bandeau">
+    <div>
+      <p class="surtitre">Sujet de projet</p>
+      <h1>Pizza Rush</h1>
+      <p class="accroche">
+        Des clients commandent des pizzas, vos coursiers partent de la pizzeria et les livrent, et
+        une livraison rapporte d'autant plus de points qu'elle est rapide. Vous écrivez le cerveau du
+        jeu ; la page, l'affichage et 43 tests sont fournis.
+      </p>
+    </div>
+    <div>
+      <div class="plan" id="plan" aria-hidden="true"></div>
+      <p class="plan-legende">Pizzeria vers client, 17 cases</p>
+    </div>
+  </header>
 
-    <main>
-      <section class="panneau carte-panneau">
-        <h2>Le quartier <span id="nom-quartier" class="discret"></span></h2>
-        <div id="carte" class="carte"></div>
-        <div class="commandes-barre">
-          <button id="jouer" type="button" class="principal">Jouer</button>
-          <button id="un-tour" type="button">Un tour</button>
-          <button id="rejouer" type="button">Rejouer</button>
-        </div>
-        <p class="legende">
-          <span><span class="pastille pizzeria">P</span>pizzeria</span>
-          <span><span class="pastille coursier">V</span>coursier</span>
-          <span><span class="pastille client">!</span>client qui attend</span>
-          <span><span class="pastille mur"></span>immeuble</span>
-        </p>
-      </section>
+  <dl class="chiffres">
+    <div><dt>Durée</dt><dd>5 à 6 h</dd></div>
+    <div><dt>Travail</dt><dd>Individuel</dd></div>
+    <div><dt>Étapes</dt><dd>4</dd></div>
+    <div><dt>Tests fournis</dt><dd>43</dd></div>
+    <div><dt>Fichiers à écrire</dt><dd>4</dd></div>
+    <div><dt>Dépendances</dt><dd>Aucune</dd></div>
+  </dl>
 
-      <section class="panneau">
-        <h2>Les coursiers</h2>
-        <ul id="coursiers" class="liste coursiers"></ul>
+  <div class="encadre">
+    <span class="titre">Le projet est fini quand</span>
+    <p>
+      <code>npm test</code> affiche <code>43 tests, tout est vert.</code>, le service se joue en
+      entier dans le navigateur jusqu'au message <code>Service termine</code>, et
+      <code>tests/test_4_les_votres.js</code> contient au moins deux tests de vous.
+    </p>
+  </div>
 
-        <h2>En attente</h2>
-        <ul id="commandes" class="liste commandes"></ul>
-      </section>
-    </main>
+  <p>
+    Le projet tient en trois pages, qui partagent la même feuille de style. Vous lisez la première :
+    le sujet. Les deux autres servent pendant que vous codez.
+  </p>
+  <ul class="interfaces">
+    <li>
+      <a class="lien" href="jeu.html">Le jeu</a>
+      <p>
+        La partie qui se joue dans le navigateur : la carte, les coursiers, le journal du service.
+        Tant que vos fonctions ne sont pas écrites, la page affiche le nom de la première qui manque.
+      </p>
+    </li>
+    <li>
+      <a class="lien" href="tests.html">Les tests</a>
+      <p>
+        Les 43 tests fournis, lancés dans le navigateur. Le premier test rouge est votre prochaine
+        étape. En console, la même chose avec <code>npm test</code>.
+      </p>
+    </li>
+  </ul>
 
-    <section class="panneau journal-panneau">
-      <h2>Le service</h2>
-      <div id="journal" class="journal"></div>
-    </section>
+  <nav class="sommaire">
+    <h2>Sommaire</h2>
+    <ol>
+      <li><a href="#s1"><span class="n">1</span><span>Le projet en bref</span></a></li>
+      <li><a href="#s2"><span class="n">2</span><span>Les règles du jeu</span></a></li>
+      <li><a href="#s3"><span class="n">3</span><span>Fourni, à écrire</span></a></li>
+      <li><a href="#s4"><span class="n">4</span><span>Mise en route</span></a></li>
+      <li><a href="#s5"><span class="n">5</span><span>Le cycle des tests</span></a></li>
+      <li><a href="#s6"><span class="n">6</span><span>Conventions de codage</span></a></li>
+      <li><a href="#s7"><span class="n">7</span><span>Étape 1 : les modèles</span></a></li>
+      <li><a href="#s8"><span class="n">8</span><span>Étape 2 : les algorithmes</span></a></li>
+      <li><a href="#s9"><span class="n">9</span><span>Étape 3 : réseau et partie</span></a></li>
+      <li><a href="#s10"><span class="n">10</span><span>Étape 4 : vos tests</span></a></li>
+      <li><a href="#s11"><span class="n">11</span><span>L'architecture (MVC)</span></a></li>
+      <li><a href="#s12"><span class="n">12</span><span>Le rendu attendu</span></a></li>
+      <li><a href="#s13"><span class="n">13</span><span>Problèmes courants</span></a></li>
+      <li><a href="#s14"><span class="n">14</span><span>Ressources par notion</span></a></li>
+      <li><a href="#s15"><span class="n">15</span><span>Pour aller plus loin</span></a></li>
+    </ol>
+  </nav>
 
-    <footer><a href="tests.html">Lancer les tests</a> et <a href="sujet.html">lire le sujet</a></footer>
+  <!-- --------------------------------------------------------------- 1 -->
+  <section id="s1">
+    <h2><span class="n">01</span><span>Le projet en bref</span></h2>
+    <p>
+      Une pizzeria est installée dans un quartier dessiné comme une grille de rues et d'immeubles.
+      Pendant le service, des commandes arrivent les unes après les autres. Trois coursiers, deux
+      vélos et un scooter, vont chercher les pizzas à la pizzeria et les portent chez les clients.
+    </p>
+    <p>
+      Le jeu se joue au tour par tour : à chaque tour, les nouvelles commandes arrivent, un coursier
+      libre part pour chacune, tout le monde avance de quelques cases, et ceux qui sont arrivés
+      livrent.
+    </p>
+    <p>Vous n'écrivez ni HTML ni CSS, et pas non plus l'affichage. Vous écrivez la logique :</p>
+    <div class="tableau">
+      <table>
+        <thead>
+          <tr>
+            <th>Vous écrivez</th>
+            <th>C'est-à-dire</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="mono">src/modeles.js</td>
+            <td>les objets du jeu : une commande, un coursier, un vélo, un scooter</td>
+          </tr>
+          <tr>
+            <td class="mono">src/algos.js</td>
+            <td>se repérer sur la carte, trouver un chemin, choisir le coursier qui part</td>
+          </tr>
+          <tr>
+            <td class="mono">src/jeu.js</td>
+            <td>charger les données par le réseau, et appliquer les règles du jeu</td>
+          </tr>
+          <tr>
+            <td class="mono">tests/test_4_les_votres.js</td>
+            <td>deux tests de votre cru</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-    <script type="module" src="src/main.js"></script>
+    <h3>Ce que ce projet vous fait travailler</h3>
+    <p>
+      <b>Programmation objet.</b> Écrire une classe qui refuse des données invalides ; utiliser
+      l'héritage pour ne pas écrire deux fois le même code ; comprendre pourquoi une méthode écrite
+      une seule fois dans la classe mère se comporte différemment dans deux sous-classes.
+    </p>
+    <p>
+      <b>Algorithmique.</b> Représenter une carte en mémoire ; écrire un parcours en largeur et
+      reconstruire le chemin trouvé ; évaluer le coût d'un algorithme.
+    </p>
+    <p>
+      <b>Réseau.</b> Émettre une requête HTTP avec <code>fetch</code> ; lire un code de réponse ;
+      décoder du JSON ; comprendre pourquoi un serveur local est nécessaire.
+    </p>
+    <p>
+      <b>Génie logiciel.</b> Séparer modèle, vue et contrôleur ; ne pas modifier ses arguments ;
+      signaler une erreur par une exception ; valider ce qui vient de l'extérieur ; lire une suite de
+      tests comme une spécification, et en écrire.
+    </p>
+
+    <h3>Prérequis</h3>
+    <p>
+      Savoir programmer dans un langage quelconque, y compris la notion de classe. Une connaissance
+      sommaire de HTML et de JavaScript suffit. Si une notion vous manque, la
+      <a href="#s14">section 14</a> donne une ressource pour chacune, et chaque étape rappelle celles
+      qui la concernent. Outils : un navigateur, un éditeur de texte, et Python ou Node pour lancer
+      un serveur local.
+    </p>
+  </section>
+
+  <!-- --------------------------------------------------------------- 2 -->
+  <section id="s2">
+    <h2><span class="n">02</span><span>Les règles du jeu</span></h2>
+    <p class="amorce">
+      Le jeu tient en six règles, listées en fin de section. Tout le reste n'est que du détail sur
+      ces six règles.
+    </p>
+
+    <h3><span class="n">2.1</span>Le tour de jeu</h3>
+    <p>Un tour se déroule toujours dans cet ordre, sans exception :</p>
+    <ol class="phases">
+      <li>
+        <span class="n">01</span>
+        <span>
+          <b>Les arrivées</b>
+          Les commandes du moment entrent dans la file d'attente.
+          <span class="qui">Le contrôleur, fourni</span>
+        </span>
+      </li>
+      <li>
+        <span class="n">02</span>
+        <span>
+          <b>Les départs</b>
+          Pour chaque commande en attente, le coursier libre le plus proche part la livrer.
+          <span class="qui">Partie.assigner, à écrire</span>
+        </span>
+      </li>
+      <li>
+        <span class="n">03</span>
+        <span>
+          <b>Les déplacements</b>
+          Le compteur de tours augmente de 1, et chaque coursier en route avance de quelques cases.
+          <span class="qui">Partie.avancer, à écrire</span>
+        </span>
+      </li>
+      <li>
+        <span class="n">04</span>
+        <span>
+          <b>Les livraisons</b>
+          Ceux qui sont arrivés chez leur client livrent et marquent des points.
+          <span class="qui">Partie.avancer, à écrire</span>
+        </span>
+      </li>
+    </ol>
+    <div class="encadre">
+      <p>
+        <code>Partie.tour()</code> enchaîne les points 2, 3 et 4. Conséquence utile : une commande
+        confiée à un coursier au tour T le voit avancer dès le tour T.
+      </p>
+    </div>
+
+    <h3><span class="n">2.2</span>Le quartier</h3>
+    <p>
+      Le quartier est une grille. Chaque case est soit une rue, où l'on peut passer, soit un
+      immeuble, où l'on ne peut pas. Il est décrit par <code>donnees/quartier.json</code> :
+    </p>
+    <pre><code>{
+  "nom": "Quartier des Tanneurs",
+  "largeur": 14,
+  "hauteur": 10,
+  "pizzeria": { "x": 1, "y": 1 },
+  "plan": ["..............", ".....##...##..", "..."]
+}</code></pre>
+    <ul>
+      <li><code>plan</code> est un tableau de chaînes, une chaîne par ligne de la carte ;</li>
+      <li>
+        le caractère <code>plan[y][x]</code> vaut <code>"."</code> pour une rue et <code>"#"</code>
+        pour un immeuble. Attention à l'ordre : <b>ligne d'abord (<code>y</code>), colonne ensuite
+        (<code>x</code>)</b> ;
+      </li>
+      <li>
+        une <b>position</b> est un objet <code>{x, y}</code> : <code>x</code> est la colonne,
+        <code>y</code> la ligne, toutes deux à partir de 0. La case en haut à gauche est
+        <code>{x: 0, y: 0}</code> ;
+      </li>
+      <li>la <b>pizzeria</b> est le seul endroit où l'on prend des pizzas.</li>
+    </ul>
+    <pre><code>      x 0 1 2 3 4
+    y 0 . . . . .        "."  rue
+      1 . # # # .        "#"  immeuble
+      2 . # . . .
+      3 . . . . .        pizzeria en (0, 0)</code></pre>
+    <p>
+      <b>On se déplace en haut, à droite, en bas, à gauche, jamais en diagonale.</b> Une case hors de
+      la grille compte comme un immeuble : on ne peut pas y aller.
+    </p>
+
+    <h3><span class="n">2.3</span>Les commandes</h3>
+    <div class="tableau">
+      <table>
+        <thead>
+          <tr>
+            <th>Propriété</th>
+            <th>Sens</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="mono">id</td><td>numéro de la commande, entier strictement positif</td></tr>
+          <tr><td class="mono">destination</td><td>la case du client, une position <code>{x, y}</code></td></tr>
+          <tr><td class="mono">pizzas</td><td>la liste des pizzas commandées, au moins une</td></tr>
+          <tr><td class="mono">creeeAu</td><td>le numéro du tour où la commande est arrivée</td></tr>
+          <tr><td class="mono">livreeAu</td><td>le tour de livraison, <code>null</code> tant qu'elle n'est pas livrée</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Les commandes du service sont écrites à l'avance dans <code>donnees/commandes.json</code> avec
+      leur tour d'arrivée : une commande dont <code>creeeAu</code> vaut 12 apparaît au tour 12. Elles
+      sont servies <b>dans l'ordre où elles arrivent</b> : premier arrivé, premier servi. Aucun tri,
+      aucune priorité.
+    </p>
+    <p>
+      Une commande est refusée dans un seul cas : sa destination est <b>inaccessible</b> depuis la
+      pizzeria, parce qu'elle est hors carte, sur un immeuble, ou coupée du reste du quartier par des
+      immeubles. Elle n'entre alors pas dans la file, sinon elle y resterait pour toujours et le
+      service ne se terminerait jamais. Le refus est signalé par une exception ; le contrôleur
+      l'écrit dans le journal et la partie continue.
+    </p>
+
+    <h3><span class="n">2.4</span>Les coursiers</h3>
+    <p>
+      Un coursier a un nom et une position. À tout instant, il est soit libre, soit en route : il
+      porte une commande et il lui reste un chemin à parcourir. Les trois types ne diffèrent que par
+      leur vitesse.
+    </p>
+    <div class="tableau">
+      <table>
+        <thead>
+          <tr>
+            <th>Classe</th>
+            <th>type</th>
+            <th>Vitesse (cases par tour)</th>
+            <th>Lettre sur la carte</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="mono">Coursier</td>
+            <td class="mono">"coursier"</td>
+            <td class="mono">1</td>
+            <td class="mono">C</td>
+          </tr>
+          <tr>
+            <td class="mono">Velo</td>
+            <td class="mono">"velo"</td>
+            <td class="mono">2</td>
+            <td class="mono">V</td>
+          </tr>
+          <tr>
+            <td class="mono">Scooter</td>
+            <td class="mono">"scooter"</td>
+            <td class="mono">3</td>
+            <td class="mono">S</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      La flotte du jeu, définie dans <code>src/main.js</code> : <b>Ana</b> (vélo), <b>Cheikh</b>
+      (vélo), <b>Bilal</b> (scooter). Tous les trois démarrent à la pizzeria.
+    </p>
+    <ul>
+      <li>
+        un coursier libre ne bouge pas : il reste là où sa dernière livraison l'a laissé, il ne
+        rentre pas automatiquement à la pizzeria ;
+      </li>
+      <li>un coursier en route ne peut pas prendre une deuxième commande ;</li>
+      <li>
+        un coursier avance d'au plus <code>vitesse</code> cases par tour. S'il ne reste qu'une case
+        et que sa vitesse est 3, il fait cette case et s'arrête : il est arrivé ;
+      </li>
+      <li>
+        le nombre de pizzas ne le gêne pas : n'importe quel coursier peut prendre n'importe quelle
+        commande.
+      </li>
+    </ul>
+
+    <h3><span class="n">2.5</span>Qui part livrer</h3>
+    <p>
+      Un coursier ne va jamais directement chez le client : il passe d'abord prendre les pizzas à la
+      pizzeria. Son itinéraire est donc en deux morceaux mis bout à bout, chacun étant un plus court
+      chemin qui évite les immeubles :
+    </p>
+    <pre><code>position du coursier  ->  pizzeria  ->  client</code></pre>
+    <p>
+      Pour une commande en attente, <b>c'est le coursier libre le plus proche qui part</b> : celui
+      dont l'itinéraire compte le moins de cases. Un scooter rapide mais à l'autre bout du quartier
+      perd donc contre un vélo déjà sur place.
+    </p>
+    <p>
+      À distance égale, c'est le premier nom dans l'ordre alphabétique qui part. Cette règle n'a pas
+      d'autre but que de rendre le jeu reproductible : deux exécutions donnent exactement le même
+      déroulé, ce qui est indispensable pour tester. S'il n'y a plus aucun coursier libre, la
+      commande reste dans la file et sera reproposée au tour suivant.
+    </p>
+
+    <h3><span class="n">2.6</span>Les points</h3>
+    <pre><code>delai  = livreeAu - creeeAu             le nombre de tours d'attente du client
+points = (30 - delai) x nombre de pizzas, et jamais moins de zero</code></pre>
+    <div class="tableau">
+      <table>
+        <thead>
+          <tr>
+            <th>Commande</th>
+            <th>creeeAu</th>
+            <th>livreeAu</th>
+            <th>Délai</th>
+            <th>Pizzas</th>
+            <th>Points</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>rapide</td><td class="mono">0</td><td class="mono">2</td><td class="mono">2</td>
+            <td class="mono">1</td><td class="mono">(30 - 2) x 1 = 28</td>
+          </tr>
+          <tr>
+            <td>moyenne</td><td class="mono">10</td><td class="mono">14</td><td class="mono">4</td>
+            <td class="mono">2</td><td class="mono">(30 - 4) x 2 = 52</td>
+          </tr>
+          <tr>
+            <td>très tardive</td><td class="mono">0</td><td class="mono">40</td><td class="mono">40</td>
+            <td class="mono">2</td><td class="mono">0, jamais negatif</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Le score de la partie est la somme des points de toutes les livraisons. Sur le quartier fourni,
+      un service complet donne environ 720 points en 81 tours.
+    </p>
+
+    <h3><span class="n">2.7</span>La fin du service</h3>
+    <p>Le service est terminé quand les trois conditions sont réunies :</p>
+    <ul>
+      <li>plus aucune commande à venir dans le carnet,</li>
+      <li>la file d'attente est vide,</li>
+      <li>aucun coursier n'est en route.</li>
+    </ul>
+    <p>Le contrôleur affiche alors le nombre de tours et le score final.</p>
+
+    <h3><span class="n">2.8</span>Un service joué à la main</h3>
+    <p>
+      Avec <b>Ana</b> (vélo, vitesse 2) et <b>Bob</b> (scooter, vitesse 3), tous deux à la pizzeria
+      en <code>(0, 0)</code>, et la commande numéro 1 qui arrive au tour 0 : une pizza pour
+      <code>(4, 0)</code>.
+    </p>
+    <pre><code>      x 0 1 2 3 4
+    y 0 P . . . C     P = pizzeria, C = le client de la commande 1
+      1 . # # # .
+      2 . . . . .</code></pre>
+    <div class="tableau">
+      <table>
+        <thead>
+          <tr>
+            <th>Tour</th>
+            <th>Ce qui se passe</th>
+            <th>Le détail</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="mono">0</td>
+            <td>La commande entre dans la file</td>
+            <td>destination accessible, elle est acceptée</td>
+          </tr>
+          <tr>
+            <td class="mono">0</td>
+            <td>Départ</td>
+            <td>
+              Ana et Bob sont tous deux à la pizzeria, donc à 4 cases du client. Égalité, c'est Ana
+              qui part, par ordre alphabétique
+            </td>
+          </tr>
+          <tr>
+            <td class="mono">1</td>
+            <td>Déplacement</td>
+            <td>Ana fait 2 cases, elle est en <code>(2, 0)</code>. Rien à livrer</td>
+          </tr>
+          <tr>
+            <td class="mono">2</td>
+            <td>Déplacement, puis livraison</td>
+            <td>
+              Ana arrive en <code>(4, 0)</code>. Délai = 2 - 0 = 2, donc <code>(30 - 2) x 1</code>,
+              soit 28 points
+            </td>
+          </tr>
+          <tr>
+            <td class="mono">2</td>
+            <td>Fin du service</td>
+            <td>plus rien à venir, file vide, personne en route</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="encadre">
+      <p>
+        Ce déroulé est exactement celui du test
+        <code>avancer fait passer un tour, deplace les coursiers et livre a l'arrivee</code>, dans
+        <code>tests/test_3_jeu.js</code>. Si vous doutez d'une règle, le test correspondant tranche.
+      </p>
+    </div>
+
+    <h3><span class="n">2.9</span>Les six règles du jeu</h3>
+    <ol class="regles">
+      <li>
+        Toute livraison part de la pizzeria : le coursier va d'abord y prendre les pizzas, puis va
+        chez le client.
+      </li>
+      <li>
+        On se déplace en haut, à droite, en bas, à gauche, jamais en diagonale, et jamais à travers
+        un immeuble.
+      </li>
+      <li>Les commandes sont servies dans leur ordre d'arrivée.</li>
+      <li>
+        Pour chaque commande, c'est le coursier libre le plus proche qui part. À distance égale, le
+        premier nom dans l'ordre alphabétique.
+      </li>
+      <li>
+        Un coursier avance d'au plus <code>vitesse</code> cases par tour, et ne porte qu'une commande
+        à la fois.
+      </li>
+      <li>
+        Une livraison rapporte <code>(30 - delai) x nombre de pizzas</code>, jamais moins de zéro.
+      </li>
+    </ol>
+    <p>
+      Et un point de vocabulaire, qui n'est pas une règle du jeu mais qui revient partout dans le
+      code : un <b>chemin</b> est une liste de positions <b>sans</b> la case de départ et <b>avec</b>
+      la case d'arrivée. Un chemin vide veut dire que l'on est déjà arrivé.
+    </p>
+  </section>
+
+  <!-- --------------------------------------------------------------- 3 -->
+  <section id="s3">
+    <h2><span class="n">03</span><span>Ce qui est fourni, ce que vous écrivez</span></h2>
+    <pre><code>pizza-rush/
+    index.html                FOURNI  le sujet, la page d'accueil
+    jeu.html                  FOURNI  le jeu
+    tests.html                FOURNI  les tests dans le navigateur
+    style.css                 FOURNI  l'habillage des trois pages
+    package.json              FOURNI  pour npm test
+    donnees/
+        quartier.json         FOURNI  le plan du quartier
+        commandes.json        FOURNI  le carnet de commandes du service
+    src/
+        modeles.js         &lt;- A ECRIRE   etape 1
+        algos.js           &lt;- A ECRIRE   etape 2
+        jeu.js             &lt;- A ECRIRE   etape 3
+        vue.js                FOURNI  l'affichage, a lire
+        main.js               FOURNI  le controleur, a lire
+    tests/
+        mini.js               FOURNI  le mini outil de test
+        test_1_modeles.js     FOURNI  15 tests
+        test_2_algos.js       FOURNI  13 tests
+        test_3_jeu.js         FOURNI  15 tests
+        test_4_les_votres.js  &lt;- A ECRIRE   etape 4
+        lancer-node.js        FOURNI  lance les tests en console</code></pre>
+    <p>
+      Quatre fichiers à modifier, pas un de plus. Les tests fournis ne doivent pas être modifiés :
+      ils sont l'énoncé. Si vous pensez avoir trouvé une erreur dans un test fourni, signalez-la, ne
+      la corrigez pas.
+    </p>
+
+    <h3>Le squelette</h3>
+    <p>
+      Les trois fichiers à écrire sont déjà fournis, remplis, mais vides de logique. Chaque fonction
+      existe, avec son nom exact, ses paramètres, et un commentaire qui dit précisément ce qu'elle
+      doit faire. Le corps ne contient que deux lignes :
+    </p>
+    <pre><code>/**
+ * La cle texte d'une position, "x,y".
+ *
+ * Pourquoi : deux objets {x: 1, y: 2} differents ne sont jamais egaux pour
+ * un Set ou une Map, alors que deux chaines "1,2" le sont. On passe donc par
+ * une cle texte pour savoir si une case a deja ete visitee.
+ */
+export function cle(position) {
+  // TODO etape 2 : ecrire cle
+  throw new Error("etape 2 : cle");
+}</code></pre>
+    <p>
+      Votre travail consiste à remplacer chacun de ces <code>throw</code> par du vrai code. Vous
+      n'avez ni fichier à créer, ni <code>import</code> ou <code>export</code> à écrire, ni signature
+      à inventer : tout est en place.
+    </p>
+    <p>
+      Ces <code>throw</code> servent aussi pendant le développement : quand vous ouvrez le jeu, la
+      page affiche le message de la première fonction non écrite. C'est votre prochaine étape, sans
+      avoir à chercher. Pour voir tout ce qu'il reste à faire :
+    </p>
+    <pre><code>grep -rn "TODO" src/ tests/test_4_les_votres.js</code></pre>
+
+    <h3>La carte de ce qu'il y a à écrire</h3>
+    <div class="tableau">
+      <table>
+        <thead>
+          <tr>
+            <th>Étape</th>
+            <th>Fichier</th>
+            <th>À écrire</th>
+            <th>Tests</th>
+            <th>Durée</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="mono">1</td>
+            <td class="mono">src/modeles.js</td>
+            <td>
+              <code>Commande</code> : constructeur, <code>nbPizzas</code>, <code>toString</code>.
+              <code>Coursier</code> : constructeur, <code>estLibre</code>, <code>charger</code>,
+              <code>avancer</code>, <code>livrer</code>, <code>toString</code>. Puis
+              <code>Velo</code> et <code>Scooter</code>
+            </td>
+            <td class="mono">15</td>
+            <td class="mono">1 h 15</td>
+          </tr>
+          <tr>
+            <td class="mono">2</td>
+            <td class="mono">src/algos.js</td>
+            <td>
+              <code>cle</code>, <code>estLibre</code>, <code>voisins</code>,
+              <code>plusCourtChemin</code>, <code>itineraire</code>,
+              <code>coursierLePlusProche</code>
+            </td>
+            <td class="mono">13</td>
+            <td class="mono">2 h</td>
+          </tr>
+          <tr>
+            <td class="mono">3</td>
+            <td class="mono">src/jeu.js</td>
+            <td>
+              <code>chargerJson</code>, <code>chargerQuartier</code>, <code>chargerCommandes</code>.
+              <code>Partie</code> : constructeur, <code>ajouterCommande</code>,
+              <code>assigner</code>, <code>avancer</code>, <code>tour</code>, <code>points</code>
+            </td>
+            <td class="mono">15</td>
+            <td class="mono">1 h 45</td>
+          </tr>
+          <tr>
+            <td class="mono">4</td>
+            <td class="mono">tests/test_4_les_votres.js</td>
+            <td>au moins deux tests à vous</td>
+            <td class="mono">2 mini</td>
+            <td class="mono">30 min</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Les étapes se font dans l'ordre : l'étape 2 utilise les classes de l'étape 1, l'étape 3 utilise
+      les fonctions de l'étape 2.
+    </p>
+  </section>
+
+  <!-- --------------------------------------------------------------- 4 -->
+  <section id="s4">
+    <h2><span class="n">04</span><span>Mise en route</span></h2>
+    <p>
+      Un navigateur refuse de charger des modules JavaScript depuis une adresse
+      <code>file://</code>, pour des raisons de sécurité : si vous double-cliquez sur
+      <code>jeu.html</code>, vous obtiendrez une page blanche et une erreur dans la console. Il
+      faut servir le dossier par HTTP. Depuis le dossier du projet :
+    </p>
+    <pre><code>python -m http.server 8000
+# ou
+npx serve</code></pre>
+    <p>
+      Le sujet est alors sur <code>http://localhost:8000</code>, le jeu sur
+      <code>http://localhost:8000/jeu.html</code> et les tests sur
+      <code>http://localhost:8000/tests.html</code>. Avec Node, les tests s'exécutent aussi en
+      console, ce qui est le plus rapide pendant le développement :
+    </p>
+    <pre><code>npm test</code></pre>
+    <pre><code>etape 1 : modeles
+  KO  une commande garde ce qu'on lui donne
+      Error : etape 1 : le constructeur de Commande
+  ...
+
+43 rate(s) sur 43.
+Prochaine chose a faire : Error : etape 1 : le constructeur de Commande</code></pre>
+    <div class="encadre">
+      <span class="titre">Un premier lancement réussi</span>
+      <p>
+        Les 43 tests échouent, et la page du jeu affiche une erreur nommant la première fonction
+        manquante. C'est normal, c'est le point de départ. Si c'est ce que vous voyez, votre
+        environnement fonctionne.
+      </p>
+    </div>
+  </section>
+
+  <!-- --------------------------------------------------------------- 5 -->
+  <section id="s5">
+    <h2><span class="n">05</span><span>Comment travailler : le cycle des tests</span></h2>
+    <p>
+      Les 43 tests fournis sont l'énoncé détaillé : chacun décrit un comportement précis attendu.
+      Votre boucle de travail :
+    </p>
+    <ol class="numerotee">
+      <li>lancer <code>npm test</code> ;</li>
+      <li>lire le <b>premier</b> test rouge ;</li>
+      <li>ouvrir ce test et lire ce qu'il attend ;</li>
+      <li>ouvrir la fonction correspondante et sa documentation ;</li>
+      <li>écrire le code ;</li>
+      <li>relancer, et recommencer.</li>
+    </ol>
+    <p>
+      Ne cherchez pas à tout écrire avant de lancer les tests. Une fonction, un test au vert, on
+      avance.
+    </p>
+
+    <h3>Lire un test</h3>
+    <pre><code>test("toString : 'Commande #3 : 2 pizzas pour (4, 7)'", () =&gt; {
+  assert.equal(String(new Commande(3, { x: 4, y: 7 }, ["Reine", "Vege"])),
+               "Commande #3 : 2 pizzas pour (4, 7)");
+  assert.equal(String(new Commande(8, { x: 0, y: 1 }, ["Reine"])),
+               "Commande #8 : 1 pizza pour (0, 1)");
+});</code></pre>
+    <p>
+      Ce test vous dit tout : le format exact, l'espace après le <code>#</code>, la virgule dans les
+      coordonnées, et le singulier de « pizza » quand il n'y en a qu'une. Il n'y a rien à deviner.
+    </p>
+    <p>
+      Les assertions disponibles, dans <code>tests/mini.js</code>, prennent toujours d'abord ce qu'on
+      a obtenu, puis ce qu'on attendait :
+    </p>
+    <div class="tableau">
+      <table>
+        <thead>
+          <tr>
+            <th>Assertion</th>
+            <th>Vérifie</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="mono">assert.ok(valeur)</td><td>que la valeur est vraie</td></tr>
+          <tr><td class="mono">assert.equal(obtenu, attendu)</td><td>égalité stricte : nombres, chaînes, même objet</td></tr>
+          <tr><td class="mono">assert.notEqual(obtenu, attendu)</td><td>non-égalité</td></tr>
+          <tr><td class="mono">assert.deepEqual(obtenu, attendu)</td><td>égalité de structure : tableaux, objets</td></tr>
+          <tr><td class="mono">assert.throws(fn, /motif/)</td><td>que <code>fn()</code> lève une erreur dont le message contient le motif</td></tr>
+          <tr><td class="mono">await assert.rejects(promesse, /motif/)</td><td>la même chose pour une promesse rejetée</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Lire un échec</h3>
+    <pre><code>KO  coursierLePlusProche : celui qui a le moins de cases a faire
+    attendu {"nom":"Bilal"}, obtenu {"nom":"Ana"}</code></pre>
+    <p>
+      Deux lignes : ce qui était attendu, ce qui a été obtenu. Comparez-les avant de toucher au code.
+    </p>
+  </section>
+
+  <!-- --------------------------------------------------------------- 6 -->
+  <section id="s6">
+    <h2><span class="n">06</span><span>Conventions et règles de codage</span></h2>
+    <p>
+      Ces conventions valent pour tout le projet. Les tests en vérifient une partie, le reste est
+      évalué à la lecture de votre code.
+    </p>
+
+    <h3><span class="n">6.1</span>Le vocabulaire</h3>
+    <div class="tableau">
+      <table>
+        <thead>
+          <tr>
+            <th>Terme</th>
+            <th>Définition exacte</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="mono">position</td>
+            <td>
+              un objet <code>{x, y}</code>, deux entiers positifs ou nuls. <code>x</code> = colonne,
+              <code>y</code> = ligne
+            </td>
+          </tr>
+          <tr>
+            <td class="mono">quartier</td>
+            <td>
+              l'objet lu dans <code>quartier.json</code> :
+              <code>{largeur, hauteur, pizzeria, plan}</code>, où <code>plan[y][x]</code> vaut
+              <code>"."</code> ou <code>"#"</code>
+            </td>
+          </tr>
+          <tr>
+            <td class="mono">chemin</td>
+            <td>
+              une liste de positions, sans la case de départ, avec la case d'arrivée.
+              <code>[]</code> signifie que l'on est déjà arrivé
+            </td>
+          </tr>
+          <tr>
+            <td class="mono">tour (tick)</td>
+            <td>l'unité de temps du jeu, un entier qui part de 0</td>
+          </tr>
+          <tr>
+            <td class="mono">itinéraire</td>
+            <td>le chemin complet d'une livraison : coursier, puis pizzeria, puis client</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3><span class="n">6.2</span>Une fonction ne modifie pas ses arguments</h3>
+    <p>
+      C'est la règle la plus importante du projet. Un constructeur copie la position et la liste de
+      pizzas qu'il reçoit ; <code>charger</code> copie le chemin qu'on lui donne.
+    </p>
+    <p>
+      Pourquoi : une fonction qui modifie ses arguments provoque des bugs à distance, dans du code
+      qui ne l'appelle même pas. Ils sont pénibles à trouver, parce que le symptôme apparaît loin de
+      la cause. Plusieurs tests vérifient cette règle. Pour copier : <code>[...liste]</code> pour un
+      tableau, <code>{ x: p.x, y: p.y }</code> pour une position.
+    </p>
+
+    <h3><span class="n">6.3</span>Une anomalie se signale par une exception</h3>
+    <pre><code>// l'appelant sait ce qui s'est passe et peut reagir
+throw new Error(`commande ${id} inaccessible depuis la pizzeria`);
+
+// l'appelant recoit null et ne sait pas pourquoi
+console.log("erreur");
+return null;</code></pre>
+    <p>
+      Le message doit dire la nature du problème et l'élément concerné. Certains tests vérifient
+      qu'un mot précis apparaît dans le message. Ces mots sont indiqués dans la documentation de
+      chaque fonction : <code>deja</code>, <code>rien</code>, <code>arrive</code>,
+      <code>inaccessible</code>, <code>quartier invalide</code>.
+    </p>
+    <p>
+      Une valeur <code>null</code> reste légitime quand elle est un résultat normal et non une
+      erreur : <code>plusCourtChemin</code> renvoie <code>null</code> quand il n'existe pas de
+      chemin, et c'est documenté comme tel.
+    </p>
+
+    <h3><span class="n">6.4</span>Les données venues de l'extérieur sont validées</h3>
+    <p>
+      Un constructeur contrôle ses arguments, <code>chargerQuartier</code> contrôle le fichier reçu.
+      Un contrôle fait tôt produit un message précis, du genre « quartier invalide : la ligne 3 fait
+      12 caracteres au lieu de 14 ». La même erreur détectée plus tard produit un message
+      incompréhensible, très loin de sa cause.
+    </p>
+
+    <h3><span class="n">6.5</span>Les chaînes renvoyées par le code sont sans accents</h3>
+    <p>
+      Convention du projet, pour éviter tout problème d'encodage dans les comparaisons de tests :
+      <code>"velo"</code>, pas <code>"vélo"</code>. En revanche, vos commentaires et votre
+      documentation sont en français accentué.
+    </p>
+  </section>
+
+  <!-- --------------------------------------------------------------- 7 -->
+  <section id="s7">
+    <h2><span class="n">07</span><span>Étape 1 : les modèles</span></h2>
+    <dl class="fiche">
+      <div><dt>Fichier</dt><dd>src/modeles.js</dd></div>
+      <div><dt>Tests</dt><dd>test_1_modeles.js</dd></div>
+      <div><dt>Nombre</dt><dd>15</dd></div>
+      <div><dt>Durée</dt><dd>1 h 15</dd></div>
+    </dl>
+    <p>
+      Cette étape crée les objets du jeu : une commande, un coursier, et deux types de coursiers.
+      Rien ici ne connaît la carte, les règles ni l'écran : ce sont des objets simples, faciles à
+      tester.
+    </p>
+
+    <h3><span class="n">7.1</span>La classe Commande</h3>
+    <div class="tableau">
+      <table>
+        <thead>
+          <tr>
+            <th>Élément</th>
+            <th>À faire</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="mono">constructor(id, destination, pizzas, creeeAu = 0)</td>
+            <td>
+              ranger les données dans <code>this.id</code>, <code>this.destination</code>,
+              <code>this.pizzas</code>, <code>this.creeeAu</code>, et mettre
+              <code>this.livreeAu</code> à <code>null</code>
+            </td>
+          </tr>
+          <tr><td class="mono">get nbPizzas()</td><td>le nombre de pizzas de la commande</td></tr>
+          <tr>
+            <td class="mono">toString()</td>
+            <td>
+              <code>"Commande #3 : 2 pizzas pour (4, 7)"</code>, et <code>"1 pizza"</code> au
+              singulier
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Le constructeur copie la destination et la liste de pizzas : modifier après coup l'objet qu'on
+      lui a passé ne doit rien changer à la commande. Il lève une <code>Error</code> si :
+    </p>
+    <ul>
+      <li>
+        <code>id</code> n'est pas un entier strictement positif : <code>0</code>, <code>-1</code>,
+        <code>"3"</code> sont refusés ;
+      </li>
+      <li>
+        <code>destination</code> n'est pas une position valide. Utilisez
+        <code>estUnePosition</code>, fournie en haut du fichier ;
+      </li>
+      <li><code>pizzas</code> est vide ou n'est pas un tableau.</li>
+    </ul>
+
+    <h3><span class="n">7.2</span>La classe Coursier</h3>
+    <div class="tableau">
+      <table>
+        <thead>
+          <tr>
+            <th>Élément</th>
+            <th>À faire</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="mono">constructor(nom, position)</td>
+            <td>
+              ranger <code>this.nom</code> et une copie de <code>this.position</code> ; au départ
+              <code>this.commande</code> vaut <code>null</code> et <code>this.chemin</code> vaut
+              <code>[]</code>
+            </td>
+          </tr>
+          <tr><td class="mono">get estLibre()</td><td>vrai s'il n'a pas de commande en cours</td></tr>
+          <tr>
+            <td class="mono">charger(commande, chemin)</td>
+            <td>prendre la commande et une copie du chemin</td>
+          </tr>
+          <tr>
+            <td class="mono">avancer()</td>
+            <td>avancer d'au plus <code>vitesse</code> cases, et renvoyer « est-il arrivé ? »</td>
+          </tr>
+          <tr>
+            <td class="mono">livrer()</td>
+            <td>rendre la commande, redevenir libre, et renvoyer la commande</td>
+          </tr>
+          <tr><td class="mono">toString()</td><td><code>"Ana (velo) en (1, 1)"</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Le constructeur lève une <code>Error</code> si le nom est vide, ou seulement des espaces, ou si
+      la position est invalide. <code>charger</code> lève une <code>Error</code> si le coursier livre
+      déjà, avec un message contenant <code>deja</code>.
+    </p>
+    <p>
+      <code>avancer</code> en détail : le coursier retire jusqu'à <code>vitesse</code> cases du début
+      de son chemin, et chaque case retirée devient sa nouvelle position. Il renvoie
+      <code>true</code> si le chemin est vide après ce déplacement, <code>false</code> sinon. Un
+      coursier libre ne bouge pas et renvoie <code>false</code>.
+    </p>
+    <pre><code>chemin = [(1,0), (2,0), (3,0), (4,0), (5,0)]   un velo (vitesse 2) en (0,0)
+
+avancer() -> position (2,0), chemin = [(3,0), (4,0), (5,0)]   renvoie false
+avancer() -> position (4,0), chemin = [(5,0)]                 renvoie false
+avancer() -> position (5,0), chemin = []                      renvoie true</code></pre>
+    <p>
+      <code>livrer</code> lève une <code>Error</code> s'il n'y a rien à livrer (message contenant
+      <code>rien</code>) ou si le chemin n'est pas terminé (message contenant <code>arrive</code>).
+    </p>
+
+    <h3><span class="n">7.3</span>Velo et Scooter : l'héritage</h3>
+    <p>
+      C'est le point le plus intéressant de l'étape. Ces deux classes héritent de
+      <code>Coursier</code> et <b>ne redéfinissent que trois accesseurs</b> : <code>type</code>,
+      <code>vitesse</code> et <code>symbole</code>, la lettre affichée sur la carte. Rien d'autre.
+      Chacune tient en quelques lignes.
+    </p>
+    <pre><code>export class Velo extends Coursier {
+  get type() {
+    return "velo";
+  }
+  // et vitesse, et symbole
+}</code></pre>
+    <div class="encadre">
+      <span class="titre">Pourquoi il n'y a rien d'autre à écrire</span>
+      <p>
+        <code>charger</code>, <code>avancer</code> et <code>livrer</code> sont écrites une seule
+        fois, dans <code>Coursier</code>. Le code de <code>avancer</code> lit
+        <code>this.vitesse</code>, qui vaut 2 quand l'objet est un vélo et 3 quand c'est un scooter.
+        La même méthode se comporte donc différemment selon le type réel de l'objet, sans un seul
+        <code>if</code>. Si vous vous surprenez à copier une méthode de <code>Coursier</code> dans
+        <code>Velo</code>, arrêtez-vous : c'est le signe qu'une valeur doit devenir un accesseur.
+      </p>
+    </div>
+
+    <h3>Si une notion vous manque</h3>
+    <dl class="ressources">
+      <div>
+        <dt>Classe, constructeur, <code>this</code></dt>
+        <dd>
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Classes">Les classes</a>,
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Classes/constructor">constructor</a>
+        </dd>
+      </div>
+      <div>
+        <dt>Accesseur</dt>
+        <dd><a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Functions/get">get</a></dd>
+      </div>
+      <div>
+        <dt>Héritage</dt>
+        <dd>
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Classes/extends">extends</a>,
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Operators/super">super</a>
+        </dd>
+      </div>
+      <div>
+        <dt>Lever une erreur</dt>
+        <dd>
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Statements/throw">throw</a>,
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>
+        </dd>
+      </div>
+      <div>
+        <dt>Copier un tableau ou un objet</dt>
+        <dd>
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Operators/Spread_syntax">Syntaxe de décomposition</a>
+        </dd>
+      </div>
+      <div>
+        <dt>Construire une chaîne</dt>
+        <dd>
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Template_literals">Littéraux de gabarits</a>
+        </dd>
+      </div>
+      <div>
+        <dt>Vérifier un entier, un tableau</dt>
+        <dd>
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Number/isInteger">Number.isInteger</a>,
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray">Array.isArray</a>
+        </dd>
+      </div>
+    </dl>
+    <p>
+      <b>L'étape est finie quand</b> les 15 tests de <code>etape 1 : modeles</code> sont au vert.
+      Faites un commit.
+    </p>
+  </section>
+
+  <!-- --------------------------------------------------------------- 8 -->
+  <section id="s8">
+    <h2><span class="n">08</span><span>Étape 2 : les algorithmes</span></h2>
+    <dl class="fiche">
+      <div><dt>Fichier</dt><dd>src/algos.js</dd></div>
+      <div><dt>Tests</dt><dd>test_2_algos.js</dd></div>
+      <div><dt>Nombre</dt><dd>13</dd></div>
+      <div><dt>Durée</dt><dd>2 h</dd></div>
+    </dl>
+    <p>
+      Six fonctions, dont aucune ne modifie ses arguments : elles reçoivent des données et renvoient
+      un résultat. Ce sont des fonctions pures, et c'est ce qui les rend faciles à tester.
+    </p>
+
+    <h3><span class="n">8.1</span>Les trois fonctions de base</h3>
+    <div class="tableau">
+      <table>
+        <thead>
+          <tr>
+            <th>Fonction</th>
+            <th>Rôle</th>
+            <th>Exemple</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="mono">cle(position)</td>
+            <td>la clé texte d'une position</td>
+            <td class="mono">cle({x: 3, y: 7}) donne "3,7"</td>
+          </tr>
+          <tr>
+            <td class="mono">estLibre(quartier, position)</td>
+            <td>vrai si la case est dans la carte et n'est pas un immeuble</td>
+            <td class="mono">estLibre(Q, {x: -1, y: 0}) donne false</td>
+          </tr>
+          <tr>
+            <td class="mono">voisins(quartier, position)</td>
+            <td>les cases libres adjacentes, dans l'ordre haut, droite, bas, gauche</td>
+            <td class="mono">voir ci-dessous</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      <b>Pourquoi <code>cle</code> existe.</b> Deux objets <code>{x: 1, y: 2}</code> construits
+      séparément ne sont jamais considérés comme égaux par un <code>Set</code> ou une
+      <code>Map</code> : ce sont deux objets distincts en mémoire, même s'ils contiennent la même
+      chose. Deux chaînes <code>"1,2"</code>, elles, sont égales.
+    </p>
+    <pre><code>new Set([{ x: 1, y: 2 }]).has({ x: 1, y: 2 });   // false
+new Set(["1,2"]).has("1,2");                     // true</code></pre>
+    <p>
+      <b>L'ordre des voisins compte</b> : il est vérifié par les tests, et il détermine lequel des
+      plusieurs plus courts chemins possibles sera trouvé. Sur le quartier de test,
+      <code>voisins(Q, {x: 2, y: 3})</code> renvoie <code>[{x:2,y:2}, {x:3,y:3}, {x:1,y:3}]</code> :
+      haut, droite, gauche, le bas étant hors carte.
+    </p>
+
+    <h3><span class="n">8.2</span>plusCourtChemin : le parcours en largeur</h3>
+    <p>
+      C'est le cœur de l'étape. Le problème : trouver le trajet le plus court entre deux cases, en
+      évitant les immeubles.
+    </p>
+    <p>
+      <b>L'idée.</b> On explore la carte par cercles concentriques autour du départ : d'abord toutes
+      les cases à un pas, puis toutes celles à deux pas, et ainsi de suite. La première fois qu'on
+      touche l'arrivée, on y est forcément arrivé par le chemin le plus court, puisqu'on a déjà
+      exploré tout ce qui était plus proche.
+    </p>
+    <p><b>Les deux structures.</b></p>
+    <ul>
+      <li>
+        une <b>file</b>, un simple tableau, contenant les cases à explorer : on ajoute à la fin avec
+        <code>push</code>, on retire au début avec <code>shift</code>. C'est ce qui donne l'ordre par
+        cercles ;
+      </li>
+      <li>
+        une <b><code>Map</code></b> qui, pour chaque case déjà vue, retient par quelle case on y est
+        arrivé. Elle sert à savoir si une case a déjà été vue, et à reconstruire le chemin à la fin.
+      </li>
+    </ul>
+    <pre><code>si le depart ou l'arrivee est bloque      -> renvoyer null
+si depart == arrivee                      -> renvoyer []
+
+precedent &lt;- Map { cle(depart) : null }
+file      &lt;- [ depart ]
+
+tant que la file n'est pas vide :
+    courant &lt;- file.shift()
+    pour chaque voisin de courant :
+        si precedent connait deja ce voisin -> passer au suivant
+        precedent.set(cle(voisin), courant)
+        si voisin == arrivee                -> RECONSTRUIRE et renvoyer
+        file.push(voisin)
+
+renvoyer null            (la file s'est videe sans trouver l'arrivee)
+
+RECONSTRUIRE :
+    partir de l'arrivee, remonter de precedent en precedent jusqu'au depart
+    en empilant les cases, puis inverser la liste obtenue</code></pre>
+    <p><b>Un déroulé complet</b>, sur cette carte, de <code>(0, 0)</code> à <code>(2, 1)</code> :</p>
+    <pre><code>      x 0 1 2
+    y 0 . . .
+      1 . # .
+      2 . . .</code></pre>
+    <div class="tableau">
+      <table>
+        <thead>
+          <tr>
+            <th>Case sortie de la file</th>
+            <th>Voisins découverts</th>
+            <th>File après</th>
+            <th>precedent complété par</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="mono">(0,0)</td>
+            <td class="mono">(1,0), (0,1)</td>
+            <td class="mono">[(1,0), (0,1)]</td>
+            <td class="mono">1,0 vient de (0,0), 0,1 vient de (0,0)</td>
+          </tr>
+          <tr>
+            <td class="mono">(1,0)</td>
+            <td class="mono">(2,0), le bas est un immeuble</td>
+            <td class="mono">[(0,1), (2,0)]</td>
+            <td class="mono">2,0 vient de (1,0)</td>
+          </tr>
+          <tr>
+            <td class="mono">(0,1)</td>
+            <td class="mono">(0,2)</td>
+            <td class="mono">[(2,0), (0,2)]</td>
+            <td class="mono">0,2 vient de (0,1)</td>
+          </tr>
+          <tr>
+            <td class="mono">(2,0)</td>
+            <td class="mono">(2,1), l'arrivee</td>
+            <td class="mono">fin</td>
+            <td class="mono">2,1 vient de (2,0)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Reconstruction : <code>(2,1)</code> vient de <code>(2,0)</code>, qui vient de
+      <code>(1,0)</code>, qui vient de <code>(0,0)</code>, le départ, où l'on s'arrête. On a empilé
+      <code>[(2,1), (2,0), (1,0)]</code>, on inverse :
+    </p>
+    <pre><code>chemin = [(1,0), (2,0), (2,1)]     3 cases, sans le depart, avec l'arrivee</code></pre>
+    <div class="tableau">
+      <table>
+        <thead>
+          <tr>
+            <th>Situation</th>
+            <th>Résultat</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>un chemin existe</td><td>la liste des positions, sans le départ, avec l'arrivée</td></tr>
+          <tr><td>départ et arrivée sont la même case</td><td class="mono">[]</td></tr>
+          <tr><td>départ ou arrivée sur un immeuble, ou hors carte</td><td class="mono">null</td></tr>
+          <tr><td>aucun chemin, quartier coupé en deux</td><td class="mono">null</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="encadre">
+      <p>
+        <b>À écrire aussi :</b> la complexité de la fonction, en commentaire juste au-dessus, avec sa
+        justification. Une ou deux phrases suffisent : combien de fois chaque case est-elle visitée
+        au maximum, et pourquoi.
+      </p>
+    </div>
+
+    <h3><span class="n">8.3</span>Les deux fonctions de décision</h3>
+    <p>
+      <b><code>itineraire(quartier, coursier, commande)</code></b> construit le chemin complet d'une
+      livraison : de la position du coursier jusqu'à la pizzeria, puis de la pizzeria jusqu'au
+      client, les deux morceaux mis bout à bout. Renvoie <code>null</code> si l'un des deux est
+      impossible.
+    </p>
+    <p>
+      <b><code>coursierLePlusProche(coursiers, commande, quartier)</code></b> applique la règle 2.5 :
+      parmi les coursiers libres pour qui un itinéraire existe, celui dont l'itinéraire compte le
+      moins de cases ; à égalité, le premier nom dans l'ordre alphabétique. <code>null</code> s'il
+      n'y a personne.
+    </p>
+
+    <h3>Si une notion vous manque</h3>
+    <dl class="ressources">
+      <div>
+        <dt>Le parcours en largeur</dt>
+        <dd>
+          <a href="https://fr.wikipedia.org/wiki/Algorithme_de_parcours_en_largeur">Parcours en largeur, Wikipédia</a>,
+          <a href="https://www.redblobgames.com/pathfinding/a-star/introduction.html">introduction visuelle et animée, en anglais</a>
+        </dd>
+      </div>
+      <div>
+        <dt>Map et Set</dt>
+        <dd>
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a>,
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Set">Set</a>
+        </dd>
+      </div>
+      <div>
+        <dt>Un tableau comme file</dt>
+        <dd>
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/push">push</a>,
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/shift">shift</a>
+        </dd>
+      </div>
+      <div>
+        <dt>Filtrer, transformer une liste</dt>
+        <dd>
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/filter">filter</a>,
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/map">map</a>
+        </dd>
+      </div>
+      <div>
+        <dt>Comparer deux noms</dt>
+        <dd>
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare">localeCompare</a>
+        </dd>
+      </div>
+    </dl>
+    <p>
+      <b>L'étape est finie quand</b> les 13 tests de <code>etape 2 : algos</code> sont au vert et que
+      la complexité de <code>plusCourtChemin</code> est écrite et justifiée. Faites un commit.
+    </p>
+  </section>
+
+  <!-- --------------------------------------------------------------- 9 -->
+  <section id="s9">
+    <h2><span class="n">09</span><span>Étape 3 : le réseau et la partie</span></h2>
+    <dl class="fiche">
+      <div><dt>Fichier</dt><dd>src/jeu.js</dd></div>
+      <div><dt>Tests</dt><dd>test_3_jeu.js</dd></div>
+      <div><dt>Nombre</dt><dd>15</dd></div>
+      <div><dt>Durée</dt><dd>1 h 45</dd></div>
+    </dl>
+    <p>
+      Deux sujets distincts dans le même fichier : charger les données depuis le réseau, puis
+      appliquer les règles du jeu.
+    </p>
+
+    <h3><span class="n">9.1</span>Charger les données : fetch, HTTP et JSON</h3>
+    <p>
+      Un fichier JSON posé à côté de la page se lit exactement comme on appellerait une API : une
+      requête HTTP part, une réponse revient avec un code. C'est le même mécanisme et le même code
+      JavaScript.
+    </p>
+    <p>
+      <b><code>chargerJson(url, fetchFn = fetch)</code></b> fait un GET sur l'URL et renvoie le JSON
+      décodé.
+    </p>
+    <ul>
+      <li>
+        <code>fetch</code> renvoie une promesse, et la méthode <code>json()</code> de la réponse
+        aussi : les trois fonctions de chargement sont donc <code>async</code> et utilisent
+        <code>await</code> ;
+      </li>
+      <li>
+        <b>on vérifie toujours le code de réponse avant de lire le contenu</b> : la réponse a une
+        propriété <code>ok</code>, vraie pour un code 2xx, et une propriété <code>status</code>, le
+        code exact, 200 trouvé, 404 absent, 500 panne du serveur ;
+      </li>
+      <li>
+        si <code>reponse.ok</code> est faux, levez une <code>Error</code> dont le message contient le
+        code et l'URL : <code>"HTTP 404 sur donnees/quartier.json"</code>.
+      </li>
+    </ul>
+    <p>
+      Appeler <code>json()</code> sans vérifier le code, c'est tenter de décoder une page d'erreur
+      comme si elle contenait vos données : le message obtenu ne parlera pas du tout du vrai
+      problème.
+    </p>
+    <p>
+      <b><code>chargerQuartier(url, fetchFn = fetch)</code></b> charge le quartier et le valide avant
+      de le renvoyer. Elle lève une <code>Error</code> dont le message commence par
+      <code>"quartier invalide : "</code> si :
+    </p>
+    <ul>
+      <li><code>largeur</code> ou <code>hauteur</code> n'est pas un entier strictement positif ;</li>
+      <li><code>plan</code> n'a pas exactement <code>hauteur</code> lignes ;</li>
+      <li>une ligne de <code>plan</code> ne fait pas exactement <code>largeur</code> caractères ;</li>
+      <li>
+        la pizzeria n'a pas de coordonnées entières, est hors carte, ou est posée sur un immeuble.
+      </li>
+    </ul>
+    <p>
+      Pourquoi tant de contrôles : un fichier peut avoir été mal édité, et un plan qui ment sur ses
+      dimensions ferait planter l'affichage bien plus loin, avec un message sans rapport. On refuse
+      tout de suite, en disant quoi.
+    </p>
+    <p>
+      <b><code>chargerCommandes(url, fetchFn = fetch)</code></b> renvoie une liste d'instances de
+      <code>Commande</code>, pas les objets bruts du JSON, qui n'ont ni <code>nbPizzas</code> ni
+      <code>toString</code>.
+    </p>
+    <pre><code>function fauxFetch(status, corps) {
+  return async (url) =&gt; new Response(JSON.stringify(corps), { status });
+}
+
+await assert.rejects(chargerJson("nulle-part.json", fauxFetch(404, {})), /404/);</code></pre>
+    <div class="encadre">
+      <span class="titre">L'injection de dépendance</span>
+      <p>
+        Les trois fonctions reçoivent un paramètre <code>fetchFn</code> dont la valeur par défaut est
+        <code>fetch</code>. En jeu, personne ne le passe : c'est le <code>fetch</code> du navigateur
+        qui sert. Dans les tests, on passe un faux <code>fetch</code> qui renvoie des réponses
+        fabriquées, sans réseau ni serveur. Au lieu d'aller chercher lui-même ce dont il a besoin, le
+        code le reçoit en paramètre, et le test peut donc lui donner autre chose. C'est ce qui rend
+        une fonction réseau testable en quelques millisecondes, hors ligne, et de façon
+        reproductible. Le montage complet est en haut de <code>tests/test_3_jeu.js</code>.
+      </p>
+    </div>
+
+    <h3><span class="n">9.2</span>La classe Partie</h3>
+    <p><code>Partie</code> garde l'état du jeu et applique les règles de la <a href="#s2">section 2</a>.</p>
+    <div class="tableau">
+      <table>
+        <thead>
+          <tr>
+            <th>Élément</th>
+            <th>À faire</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="mono">constructor(quartier, coursiers)</td>
+            <td>
+              <code>this.tick</code> à 0, <code>this.score</code> à 0, <code>this.enAttente</code> et
+              <code>this.livrees</code> à <code>[]</code>. Lève une <code>Error</code> si le quartier
+              manque ou si la liste de coursiers est vide
+            </td>
+          </tr>
+          <tr>
+            <td class="mono">ajouterCommande(commande)</td>
+            <td>met la commande à la fin de la file d'attente</td>
+          </tr>
+          <tr>
+            <td class="mono">assigner()</td>
+            <td>fait partir les coursiers ; renvoie <code>[{coursier, commande}]</code></td>
+          </tr>
+          <tr>
+            <td class="mono">avancer()</td>
+            <td>fait passer un tour ; renvoie <code>[{coursier, commande, points}]</code></td>
+          </tr>
+          <tr>
+            <td class="mono">tour()</td>
+            <td>
+              <code>assigner()</code> puis <code>avancer()</code> ; renvoie
+              <code>{affectations, livraisons}</code>
+            </td>
+          </tr>
+          <tr>
+            <td class="mono">points(commande)</td>
+            <td>
+              <code>(30 - delai) x nbPizzas</code>, jamais moins de zéro, avec
+              <code>delai = livreeAu - creeeAu</code>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      <b><code>ajouterCommande</code></b> ajoute la commande à la fin de la file : premier arrivé,
+      premier servi. Elle lève une <code>Error</code> contenant <code>inaccessible</code> si la
+      destination n'est pas atteignable depuis la pizzeria, et dans ce cas la commande n'entre pas
+      dans la file.
+    </p>
+    <p>
+      <b><code>assigner</code></b> parcourt la file dans l'ordre et confie chaque commande au
+      coursier libre le plus proche, avec son itinéraire. S'il n'y a plus personne de libre, la
+      commande reste dans la file pour le tour suivant.
+    </p>
+    <p>
+      <b><code>avancer</code></b> augmente <code>this.tick</code> de 1, fait avancer chaque coursier
+      en route, et pour chacun qui arrive : il livre, la commande reçoit son <code>livreeAu</code>,
+      les points sont calculés et ajoutés au score, la commande rejoint <code>this.livrees</code>.
+    </p>
+    <p>
+      <b><code>Partie</code> ne lit aucun fichier et n'affiche rien.</b> Elle reçoit un quartier et
+      des coursiers déjà construits. C'est ce qui permet aux tests de jouer des parties entières sans
+      navigateur, en quelques millisecondes.
+    </p>
+
+    <h3>Si une notion vous manque</h3>
+    <dl class="ressources">
+      <div>
+        <dt>Les promesses</dt>
+        <dd>
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Using_promises">Utiliser les promesses</a>
+        </dd>
+      </div>
+      <div>
+        <dt>async et await</dt>
+        <dd>
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Statements/async_function">async function</a>,
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Operators/await">await</a>
+        </dd>
+      </div>
+      <div>
+        <dt>Faire une requête HTTP</dt>
+        <dd>
+          <a href="https://developer.mozilla.org/fr/docs/Web/API/Fetch_API/Using_Fetch">Utiliser fetch</a>,
+          <a href="https://developer.mozilla.org/fr/docs/Web/API/Response">Response</a>
+        </dd>
+      </div>
+      <div>
+        <dt>404, 500 et les autres</dt>
+        <dd>
+          <a href="https://developer.mozilla.org/fr/docs/Web/HTTP/Status">Les codes de statut HTTP</a>
+        </dd>
+      </div>
+      <div>
+        <dt>Le JSON</dt>
+        <dd>
+          <a href="https://developer.mozilla.org/fr/docs/Learn/JavaScript/Objects/JSON">Travailler avec JSON</a>
+        </dd>
+      </div>
+      <div>
+        <dt>Pourquoi un serveur local</dt>
+        <dd>
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Modules">Les modules JavaScript</a>
+        </dd>
+      </div>
+      <div>
+        <dt>Attraper une erreur</dt>
+        <dd>
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Statements/try...catch">try...catch</a>
+        </dd>
+      </div>
+    </dl>
+    <p>
+      <b>L'étape est finie quand</b> les 15 tests de <code>etape 3 : jeu</code> sont au vert et que
+      le jeu se joue en entier dans le navigateur, jusqu'au message <code>Service termine</code>.
+      Faites un commit.
+    </p>
+  </section>
+
+  <!-- -------------------------------------------------------------- 10 -->
+  <section id="s10">
+    <h2><span class="n">10</span><span>Étape 4 : vos propres tests</span></h2>
+    <dl class="fiche">
+      <div><dt>Fichier</dt><dd>tests/test_4_les_votres.js</dd></div>
+      <div><dt>Minimum</dt><dd>2 tests</dd></div>
+      <div><dt>Durée</dt><dd>30 min</dd></div>
+    </dl>
+    <p>
+      Écrivez au moins deux tests qui vérifient un comportement non couvert par les tests fournis. Le
+      fichier contient déjà les <code>import</code> nécessaires et un modèle commenté.
+    </p>
+    <p>Un bon test :</p>
+    <ul>
+      <li>porte sur un seul comportement précis ;</li>
+      <li>tient en quelques lignes ;</li>
+      <li>
+        porte un nom qui énonce ce qu'il vérifie, du genre « un coursier libre ne bouge pas », et non
+        ce qu'il appelle, du genre « test avancer 2 » ;
+      </li>
+      <li>
+        échoue si on casse le comportement qu'il vérifie. Vérifiez-le en cassant volontairement votre
+        code pendant une minute.
+      </li>
+    </ul>
+    <p>Privilégiez les cas limites, là où les bugs se cachent :</p>
+    <ul>
+      <li>une carte d'une seule case ;</li>
+      <li>un chemin dont la longueur vaut exactement la vitesse du coursier ;</li>
+      <li>une commande dont la destination est la pizzeria elle-même ;</li>
+      <li>une partie où personne ne peut livrer : le score bouge-t-il ?</li>
+      <li>
+        une commande livrée très en retard : les points tombent-ils bien à zéro sans devenir
+        négatifs ?
+      </li>
+    </ul>
+    <pre><code>test("un coursier arrive en un coup si le chemin fait sa vitesse", () =&gt; {
+  const velo = new Velo("Ana", { x: 0, y: 0 });
+  velo.charger(new Commande(1, { x: 2, y: 0 }, ["Reine"]),
+               [{ x: 1, y: 0 }, { x: 2, y: 0 }]);
+  assert.equal(velo.avancer(), true);
+});</code></pre>
+  </section>
+
+  <!-- -------------------------------------------------------------- 11 -->
+  <section id="s11">
+    <h2><span class="n">11</span><span>L'architecture du projet (MVC)</span></h2>
+    <p>Le projet est découpé en trois rôles, et ce découpage est évalué.</p>
+    <div class="tableau">
+      <table>
+        <thead>
+          <tr>
+            <th>Rôle</th>
+            <th>Fichiers</th>
+            <th>Ce qu'il fait</th>
+            <th>Ce qu'il ne fait jamais</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="mono">Modèle</td>
+            <td class="mono">modeles.js, algos.js, jeu.js</td>
+            <td>détient l'état et les règles</td>
+            <td>afficher, connaître le navigateur</td>
+          </tr>
+          <tr>
+            <td class="mono">Vue</td>
+            <td class="mono">vue.js (fourni)</td>
+            <td>affiche une partie</td>
+            <td>modifier la partie, connaître les règles</td>
+          </tr>
+          <tr>
+            <td class="mono">Contrôleur</td>
+            <td class="mono">main.js (fourni)</td>
+            <td>charge les données, écoute les boutons, fait avancer le modèle</td>
+            <td>calculer quoi que ce soit</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      La vue et le contrôleur sont fournis et courts. Les lire fait partie du travail : c'est là que
+      vous verrez comment vos fonctions sont réellement utilisées, et comment un tour de jeu est
+      déclenché.
+    </p>
+    <p>À quoi sert cette séparation, concrètement :</p>
+    <ul>
+      <li>les 43 tests jouent des parties entières sans navigateur, parce que le modèle n'en dépend pas ;</li>
+      <li>on pourrait remplacer l'affichage par un affichage en console sans toucher aux règles.</li>
+    </ul>
+    <p>
+      Deux signaux d'alarme : un appel à <code>document</code> dans <code>jeu.js</code>, ou une règle
+      de score dans <code>vue.js</code>. Dans les deux cas, le code est au mauvais endroit.
+    </p>
+  </section>
+
+  <!-- -------------------------------------------------------------- 12 -->
+  <section id="s12">
+    <h2><span class="n">12</span><span>Ce qui est attendu au rendu</span></h2>
+    <ul class="verif">
+      <li>Les 43 tests fournis passent, sans qu'aucun test fourni ait été modifié.</li>
+      <li>Le jeu se joue entièrement dans le navigateur, jusqu'au message de fin de service.</li>
+      <li>Au moins deux tests personnels pertinents dans <code>tests/test_4_les_votres.js</code>.</li>
+      <li>La complexité de <code>plusCourtChemin</code> est écrite et justifiée en commentaire.</li>
+      <li>
+        Les règles de codage de la <a href="#s6">section 6</a> sont respectées : pas de mutation
+        d'arguments, erreurs signalées par des exceptions au message explicite, données externes
+        validées.
+      </li>
+      <li>
+        Le dépôt Git contient un commit par étape terminée, avec un message qui décrit ce qui
+        fonctionne, du genre <code>etape 2 : algos, BFS et choix du coursier, 28 tests au vert</code>.
+      </li>
+      <li>
+        Le code est lisible : noms explicites, fonctions courtes, commentaires là où l'intention
+        n'est pas évidente à la lecture.
+      </li>
+    </ul>
+
+    <h3>Barème indicatif</h3>
+    <div class="tableau">
+      <table>
+        <thead>
+          <tr>
+            <th>Critère</th>
+            <th>Poids</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Étape 1, modèles et héritage, 15 tests</td><td class="mono">20 %</td></tr>
+          <tr><td>Étape 2, algorithmes, dont le parcours en largeur, 13 tests</td><td class="mono">25 %</td></tr>
+          <tr><td>Étape 3, réseau, validation et règles du jeu, 15 tests</td><td class="mono">25 %</td></tr>
+          <tr><td>Étape 4, pertinence des tests personnels</td><td class="mono">10 %</td></tr>
+          <tr><td>Qualité du code : lisibilité, respect des règles de la section 6</td><td class="mono">15 %</td></tr>
+          <tr><td>Complexité justifiée, historique Git propre</td><td class="mono">5 %</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Un projet dont les tests passent mais dont le code viole les règles de la section 6, par
+      exemple en modifiant ses arguments ou en avalant les erreurs, ne peut pas prétendre à la
+      totalité des points : les tests vérifient le comportement, pas la qualité.
+    </p>
+  </section>
+
+  <!-- -------------------------------------------------------------- 13 -->
+  <section id="s13">
+    <h2><span class="n">13</span><span>Problèmes courants</span></h2>
+    <ul class="problemes">
+      <li>
+        <b>Page blanche, erreur de module dans la console</b>
+        <code>jeu.html</code> a été ouvert directement, en <code>file://</code>. Servir le dossier
+        par HTTP, voir la <a href="#s4">section 4</a>.
+      </li>
+      <li>
+        <b>Le jeu affiche une erreur dès le chargement</b>
+        Normal tant que toutes les fonctions ne sont pas écrites. Le message nomme la première
+        fonction manquante : c'est votre prochaine étape.
+      </li>
+      <li>
+        <b>« attendu X, obtenu Y » sans que la différence saute aux yeux</b>
+        Ordre des clés, chaîne au lieu d'un nombre, ou <code>x</code> et <code>y</code> inversés.
+        Comparer les deux lignes caractère par caractère.
+      </li>
+      <li>
+        <b>Les positions sont décalées sur la carte</b>
+        Le plan s'indexe par <code>plan[y][x]</code> : ligne d'abord, colonne ensuite.
+      </li>
+      <li>
+        <b>Les tests passent, mais le jeu se comporte mal</b>
+        Une fonction modifie ses arguments. Vérifier les copies : <code>[...liste]</code>,
+        <code>{ x: p.x, y: p.y }</code>.
+      </li>
+      <li>
+        <b>Un test attend une erreur et n'en reçoit pas</b>
+        Vous renvoyez <code>null</code> au lieu de lever une exception. Voir la section 6.3.
+      </li>
+      <li>
+        <b>« son message ne contient pas ... »</b>
+        Le mot-clé attendu manque dans votre message d'erreur. Les mots exigés sont
+        <code>deja</code>, <code>rien</code>, <code>arrive</code>, <code>inaccessible</code>,
+        <code>quartier invalide</code>.
+      </li>
+      <li>
+        <b>plusCourtChemin renvoie un chemin trop long</b>
+        Vous marquez les cases comme visitées trop tard : une case se marque au moment où on la met
+        dans la file, pas quand on la sort.
+      </li>
+      <li>
+        <b>La partie ne se termine jamais</b>
+        Une commande impossible est restée dans la file. <code>ajouterCommande</code> doit la refuser
+        à l'entrée.
+      </li>
+      <li>
+        <b>Le mauvais coursier part</b>
+        Vous comparez les vitesses au lieu des distances. La règle est « le moins de cases à faire »,
+        pas « le plus rapide ».
+      </li>
+      <li>
+        <b>npm test : commande introuvable</b>
+        Node n'est pas installé. Utiliser <code>tests.html</code> dans le navigateur, avec le serveur
+        local.
+      </li>
+    </ul>
+  </section>
+
+  <!-- -------------------------------------------------------------- 14 -->
+  <section id="s14">
+    <h2><span class="n">14</span><span>Ressources par notion</span></h2>
+    <p>
+      Toutes ces pages sont en français, sauf mention contraire. N'y allez que si la notion vous
+      manque : le sujet et le squelette contiennent déjà ce qu'il faut pour avancer.
+    </p>
+    <dl class="ressources">
+      <div>
+        <dt>Objet et classes</dt>
+        <dd>
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Classes">Les classes</a>,
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Classes/constructor">constructor</a>,
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Classes/extends">extends</a>,
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Operators/super">super</a>,
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Functions/get">accesseurs get</a>
+        </dd>
+      </div>
+      <div>
+        <dt>Erreurs</dt>
+        <dd>
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Statements/throw">throw</a>,
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>,
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Statements/try...catch">try...catch</a>
+        </dd>
+      </div>
+      <div>
+        <dt>Tableaux, objets, chaînes</dt>
+        <dd>
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/filter">filter</a>,
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/map">map</a>,
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/push">push</a>,
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/shift">shift</a>,
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Operators/Spread_syntax">décomposition</a>,
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Template_literals">gabarits de chaîne</a>,
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare">localeCompare</a>,
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Math/max">Math.max</a>
+        </dd>
+      </div>
+      <div>
+        <dt>Collections</dt>
+        <dd>
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a>,
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Set">Set</a>
+        </dd>
+      </div>
+      <div>
+        <dt>Algorithmique</dt>
+        <dd>
+          <a href="https://fr.wikipedia.org/wiki/Algorithme_de_parcours_en_largeur">Parcours en largeur</a>,
+          <a href="https://www.redblobgames.com/pathfinding/a-star/introduction.html">introduction visuelle au pathfinding, en anglais</a>,
+          <a href="https://fr.wikipedia.org/wiki/Algorithme_de_Dijkstra">algorithme de Dijkstra</a>
+        </dd>
+      </div>
+      <div>
+        <dt>Asynchrone et réseau</dt>
+        <dd>
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Using_promises">Utiliser les promesses</a>,
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Statements/async_function">async function</a>,
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Operators/await">await</a>,
+          <a href="https://developer.mozilla.org/fr/docs/Web/API/Fetch_API/Using_Fetch">fetch</a>,
+          <a href="https://developer.mozilla.org/fr/docs/Web/API/Response">Response</a>,
+          <a href="https://developer.mozilla.org/fr/docs/Web/HTTP/Status">codes de statut HTTP</a>,
+          <a href="https://developer.mozilla.org/fr/docs/Learn/JavaScript/Objects/JSON">travailler avec JSON</a>
+        </dd>
+      </div>
+      <div>
+        <dt>Organisation du code</dt>
+        <dd>
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Modules">Les modules JavaScript</a>,
+          <a href="https://developer.mozilla.org/fr/docs/Glossary/MVC">MVC</a>
+        </dd>
+      </div>
+    </dl>
+  </section>
+
+  <!-- -------------------------------------------------------------- 15 -->
+  <section id="s15">
+    <h2><span class="n">15</span><span>Pour aller plus loin</span></h2>
+    <p>
+      À traiter seulement une fois les 43 tests au vert, dans l'ordre que vous voulez. Écrivez un
+      test pour chaque extension que vous ajoutez. Les trois premières remettent dans le jeu des
+      règles qui en ont été retirées pour le garder simple ; elles se font entièrement dans votre
+      code, sans toucher aux tests fournis.
+    </p>
+    <div class="tableau">
+      <table>
+        <thead>
+          <tr>
+            <th>Extension</th>
+            <th>Ce qu'elle demande</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <b>Le coffre est limité.</b> Donnez une capacité à chaque coursier, deux pizzas pour un
+              vélo, cinq pour un scooter. Un coursier ne prend plus une commande trop grosse pour
+              lui, et une commande que personne ne peut porter est refusée à l'entrée
+            </td>
+            <td>ajouter un accesseur <code>capacite</code> aux trois classes, filtrer les candidats, gérer le nouveau refus</td>
+          </tr>
+          <tr>
+            <td>
+              <b>Les commandes urgentes d'abord.</b> Au lieu de servir dans l'ordre d'arrivée, rangez
+              la file par ancienneté, puis par nombre de pizzas décroissant à ancienneté égale
+            </td>
+            <td>écrire une fonction de tri à deux critères, sans modifier la liste reçue</td>
+          </tr>
+          <tr>
+            <td>
+              <b>Le plus rapide, pas le plus proche.</b> Choisissez le coursier dont le temps estimé
+              est le plus court, soit le nombre de cases divisé par sa vitesse, arrondi à l'entier
+              supérieur
+            </td>
+            <td>un scooter loin peut alors battre un vélo proche : comparez les deux stratégies sur le même service</td>
+          </tr>
+          <tr>
+            <td>
+              <b>Le client s'impatiente.</b> Au bout de quarante tours sans livraison, la commande est
+              annulée et retire des points
+            </td>
+            <td>gérer le temps dans la boucle de jeu</td>
+          </tr>
+          <tr>
+            <td>
+              <b>Des rues lentes.</b> Un nouveau caractère du plan désigne une case qui coûte deux
+              tours. Les arêtes n'ayant plus le même coût, le parcours en largeur ne suffit plus, et
+              l'algorithme de Dijkstra reprend le même parcours avec une file ordonnée par coût
+              cumulé
+            </td>
+            <td>comprendre la limite d'un algorithme</td>
+          </tr>
+          <tr>
+            <td>
+              <b>Un nouveau coursier.</b> Une trottinette, deux cases par tour. Quelques lignes si
+              votre héritage de l'étape 1 est correct
+            </td>
+            <td>vérifier la qualité de votre hiérarchie de classes</td>
+          </tr>
+          <tr>
+            <td><b>Une carte cliquable.</b> Un clic sur une case libre y crée une commande</td>
+            <td>modifier la vue et le contrôleur</td>
+          </tr>
+          <tr>
+            <td>
+              <b>Votre quartier.</b> <code>donnees/quartier.json</code> est un dessin en caractères,
+              modifiable et agrandissable à volonté
+            </td>
+            <td>manipuler des données</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer class="pied">
+    <span>Pizza Rush</span>
+    <span><a href="index.html">Le sujet</a> · <a href="jeu.html">Le jeu</a> · <a href="tests.html">Les tests</a></span>
+    <span>43 tests, 4 etapes</span>
+  </footer>
+</div>
+
+<script>
+  // Plan du quartier tel qu'il figure dans donnees/quartier.json, avec le plus
+  // court chemin reel de la pizzeria (1, 1) vers le client (12, 7).
+  (function () {
+    var plan = [
+      "..............",
+      ".....##...##..",
+      ".##..##.......",
+      ".##........##.",
+      "...........##.",
+      ".###..#.......",
+      ".###..#..###..",
+      "......#..###..",
+      ".##...........",
+      "..............",
+    ];
+    var route = [
+      [2, 1], [3, 1], [4, 1], [4, 2], [4, 3], [5, 3], [6, 3], [7, 3], [8, 3],
+      [9, 3], [10, 3], [10, 4], [10, 5], [11, 5], [12, 5], [12, 6],
+    ];
+    var depart = [1, 1];
+    var arrivee = [12, 7];
+    var surRoute = {};
+    route.forEach(function (p) {
+      surRoute[p[0] + "," + p[1]] = true;
+    });
+
+    var hote = document.getElementById("plan");
+    if (!hote) return;
+    var fragment = document.createDocumentFragment();
+    for (var y = 0; y < plan.length; y++) {
+      for (var x = 0; x < plan[y].length; x++) {
+        var cellule = document.createElement("i");
+        if (x === depart[0] && y === depart[1]) cellule.className = "depart";
+        else if (x === arrivee[0] && y === arrivee[1]) cellule.className = "arrivee";
+        else if (surRoute[x + "," + y]) cellule.className = "route";
+        else if (plan[y][x] === "#") cellule.className = "bati";
+        fragment.appendChild(cellule);
+      }
+    }
+    hote.appendChild(fragment);
+  })();
+</script>
   </body>
 </html>

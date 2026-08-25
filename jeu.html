@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pizza Rush, le jeu</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='5' fill='%232f6b4f'/><text x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-size='20' fill='%23ffffff'>P</text></svg>"
+    />
+  </head>
+  <body class="page-jeu">
+    <header class="barre">
+      <div class="dedans large">
+        <a class="marque" href="index.html">Pizza Rush</a>
+        <nav>
+          <a href="index.html">Le sujet</a>
+          <a href="jeu.html" aria-current="page">Le jeu</a>
+          <a href="tests.html">Les tests</a>
+        </nav>
+      </div>
+    </header>
+
+    <div class="page large">
+      <header class="entete">
+        <h1>Le jeu</h1>
+        <p class="sous-titre">
+          Le service tourne ici, avec votre code. <b>Jouer</b> enchaîne les tours automatiquement,
+          <b>Un tour</b> en joue un seul pour observer, <b>Rejouer</b> repart de zéro. Tant qu'une
+          fonction n'est pas écrite, le journal affiche son nom : c'est votre prochaine étape, et les
+          règles sont dans <a href="index.html">le sujet</a>.
+        </p>
+      </header>
+
+      <div id="score" class="score"></div>
+
+      <main>
+        <section class="panneau carte-panneau">
+          <h2>Le quartier <span id="nom-quartier" class="discret"></span></h2>
+          <div id="carte" class="carte"></div>
+          <div class="commandes-barre">
+            <button id="jouer" type="button" class="principal">Jouer</button>
+            <button id="un-tour" type="button">Un tour</button>
+            <button id="rejouer" type="button">Rejouer</button>
+          </div>
+          <p class="legende">
+            <span><span class="pastille pizzeria">P</span>pizzeria</span>
+            <span><span class="pastille coursier">V</span>coursier</span>
+            <span><span class="pastille client">!</span>client qui attend</span>
+            <span><span class="pastille mur"></span>immeuble</span>
+          </p>
+        </section>
+
+        <section class="panneau">
+          <h2>Les coursiers</h2>
+          <ul id="coursiers" class="liste coursiers"></ul>
+
+          <h2>En attente</h2>
+          <ul id="commandes" class="liste commandes"></ul>
+        </section>
+      </main>
+
+      <section class="panneau journal-panneau">
+        <h2>Le service</h2>
+        <div id="journal" class="journal"></div>
+      </section>
+
+      <footer class="pied">
+        <span>Pizza Rush</span>
+        <span><a href="index.html">Le sujet</a> · <a href="jeu.html">Le jeu</a> · <a href="tests.html">Les tests</a></span>
+        <span>43 tests, 4 etapes</span>
+      </footer>
+    </div>
+
+    <script type="module" src="src/main.js"></script>
+  </body>
+</html>

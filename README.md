@@ -8,15 +8,27 @@ Le jeu en une phrase : des clients commandent des pizzas, vos coursiers partent
 de la pizzeria et les livrent, et une livraison rapporte d'autant plus de points
 qu'elle est rapide.
 
-**Le sujet complet, avec les regles du jeu et les ressources : [SUJET.md](SUJET.md).**
+## Les trois pages du projet
+
+| Page | A quoi elle sert |
+| --- | --- |
+| `index.html` | le sujet complet : les regles, les quatre etapes, les ressources |
+| `jeu.html` | le jeu : la carte, les coursiers, le journal du service |
+| `tests.html` | les 43 tests dans le navigateur |
+
+Elles partagent la meme feuille de style et se repondent : la barre du haut
+passe de l'une a l'autre.
+
+Le sujet existe aussi en texte, pour le lire directement sur GitHub :
+[SUJET.md](SUJET.md).
 
 ## Le projet en ligne
 
-Le sujet, le jeu et les tests sont publies avec GitHub Pages, sans rien installer :
+Publie avec GitHub Pages, rien a installer pour regarder :
 
-- le sujet : https://rohanfosse.github.io/pizza-rush-projet/sujet.html
-- le jeu : https://rohanfosse.github.io/pizza-rush-projet/
-- les tests : https://rohanfosse.github.io/pizza-rush-projet/tests.html
+- [le sujet](https://rohanfosse.github.io/pizza-rush-projet/)
+- [le jeu](https://rohanfosse.github.io/pizza-rush-projet/jeu.html)
+- [les tests](https://rohanfosse.github.io/pizza-rush-projet/tests.html)
 
 La version en ligne montre l'etat de depart : le jeu s'arrete sur la premiere
 fonction non ecrite, et les 43 tests sont rouges. C'est normal, c'est le point
@@ -38,7 +50,8 @@ JavaScript depuis une adresse `file://`.
 python -m http.server 8000     # ou : npx serve
 ```
 
-Le jeu est disponible sur `http://localhost:8000`, les tests sur
+Le sujet est alors sur `http://localhost:8000`, le jeu sur
+`http://localhost:8000/jeu.html`, les tests sur
 `http://localhost:8000/tests.html`.
 
 Avec Node, les tests s'executent aussi en console :
@@ -75,5 +88,4 @@ modifient pas.
 - le service se joue jusqu'au message `Service termine` dans le navigateur,
 - `tests/test_4_les_votres.js` contient au moins deux tests a vous.
 
-La liste complete du rendu attendu se trouve en section 12 de
-[SUJET.md](SUJET.md).
+La liste complete du rendu attendu se trouve en section 12 du sujet.

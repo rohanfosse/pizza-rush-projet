@@ -7,9 +7,9 @@ de points qu'elle est rapide.
 **Ce que vous faites** : vous écrivez le cerveau de ce jeu, en JavaScript, dans
 un navigateur, sans aucune bibliothèque.
 
-**Ce qui est fourni** : la page, le CSS, l'affichage, le contrôleur, les
-données, l'outil de test, **43 tests**, et un **squelette de code** où toutes
-les fonctions à écrire sont déjà déclarées et documentées.
+**Ce qui est fourni** : les trois pages et leur CSS, l'affichage, le contrôleur,
+les données, l'outil de test, **43 tests**, et un **squelette de code** où
+toutes les fonctions à écrire sont déjà déclarées et documentées.
 
 **Ce que vous rendez** : trois fichiers complétés, deux tests écrits par vous,
 et un dépôt Git avec un commit par étape.
@@ -19,6 +19,14 @@ et un dépôt Git avec un commit par étape.
 jusqu'au message `Service termine`.
 
 **Durée** : 5 à 6 heures. **Travail individuel.**
+
+**Les trois pages du projet**, qui partagent la même feuille de style :
+
+| Page | À quoi elle sert |
+| --- | --- |
+| `index.html` | ce sujet, la page d'accueil |
+| `jeu.html` | le jeu : la carte, les coursiers, le journal du service. Tant qu'une fonction n'est pas écrite, le journal affiche son nom |
+| `tests.html` | les 43 tests dans le navigateur. Le premier test rouge est votre prochaine étape |
 
 ---
 
@@ -307,9 +315,10 @@ arrivé ».
 
 ```text
 pizza-rush/
-    index.html                FOURNI  la page du jeu
+    index.html                FOURNI  le sujet, la page d'accueil
+    jeu.html                  FOURNI  le jeu
     tests.html                FOURNI  les tests dans le navigateur
-    style.css                 FOURNI  l'habillage
+    style.css                 FOURNI  l'habillage des trois pages
     package.json              FOURNI  pour npm test
     donnees/
         quartier.json         FOURNI  le plan du quartier
@@ -386,7 +395,7 @@ l'étape 3 utilise les fonctions de l'étape 2.
 
 Un navigateur refuse de charger des modules JavaScript
 (`<script type="module">`) depuis une adresse `file://`, pour des raisons de
-sécurité. Si vous double-cliquez sur `index.html`, vous obtiendrez une page
+sécurité. Si vous double-cliquez sur `jeu.html`, vous obtiendrez une page
 blanche et une erreur dans la console. Il faut servir le dossier par HTTP.
 Depuis le dossier du projet, au choix :
 
@@ -395,9 +404,10 @@ python -m http.server 8000     # si vous avez Python
 npx serve                      # si vous avez Node
 ```
 
-Puis, dans le navigateur :
+Puis, dans le navigateur, les trois pages du projet :
 
-- le jeu : <http://localhost:8000>
+- le sujet, celui que vous lisez : <http://localhost:8000>
+- le jeu : <http://localhost:8000/jeu.html>
 - les tests : <http://localhost:8000/tests.html>
 
 ### 4.2 Lancer les tests en console
@@ -1000,7 +1010,7 @@ comportement, pas la qualité.
 
 | Symptôme | Cause probable | Solution |
 | --- | --- | --- |
-| Page blanche, erreur de module dans la console | `index.html` a été ouvert directement, en `file://` | Servir le dossier par HTTP, voir la [section 4](#4-mise-en-route-5-minutes) |
+| Page blanche, erreur de module dans la console | `jeu.html` a été ouvert directement, en `file://` | Servir le dossier par HTTP, voir la [section 4](#4-mise-en-route-5-minutes) |
 | Le jeu affiche une erreur dès le chargement | Normal tant que toutes les fonctions ne sont pas écrites | Le message nomme la première fonction manquante : c'est votre prochaine étape |
 | « attendu X, obtenu Y » sans que la différence saute aux yeux | Ordre des clés, chaîne au lieu d'un nombre, ou `x` et `y` inversés | Comparer les deux lignes caractère par caractère |
 | Les positions sont décalées sur la carte | `plan` indexé dans le mauvais sens | C'est `plan[y][x]` : ligne d'abord, colonne ensuite |

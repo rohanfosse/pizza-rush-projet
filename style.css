@@ -1,181 +1,303 @@
-/* Pizza Rush, la feuille de style. Fournie : jouez avec si l'envie vous prend. */
+/* Pizza Rush, la feuille de style commune aux trois pages : le sujet
+   (index.html), le jeu (jeu.html) et les tests (tests.html).
+   Fournie : jouez avec si l'envie vous prend. */
+
+/* ------------------------------------------------------------------ jetons */
 
 :root {
   --papier: #fbfbf8;
   --surface: #ffffff;
-  --surface-creuse: #f4f4ee;
+  --creux: #f4f4ee;
   --encre: #1e2420;
   --discret: #5b6560;
   --filet: #dcddd5;
-
   --vert: #2f6b4f;
   --vert-clair: #5c8f72;
   --vert-pale: #e7efe8;
   --mur: #c7ccc4;
   --alerte: #9a4b32;
 
-  --rayon: 6px;
+  --titre: "Bitter", Georgia, "Times New Roman", serif;
+  --texte: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
 }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --papier: #11150f;
+    --surface: #181d16;
+    --creux: #1d231b;
+    --encre: #e6eae1;
+    --discret: #98a296;
+    --filet: #29312a;
+    --vert: #83ba97;
+    --vert-clair: #6f9f83;
+    --vert-pale: #1e2a21;
+    --mur: #2c332c;
+    --alerte: #d98b6d;
+  }
+}
+
+:root[data-theme="dark"] {
+  --papier: #11150f;
+  --surface: #181d16;
+  --creux: #1d231b;
+  --encre: #e6eae1;
+  --discret: #98a296;
+  --filet: #29312a;
+  --vert: #83ba97;
+  --vert-clair: #6f9f83;
+  --vert-pale: #1e2a21;
+  --mur: #2c332c;
+  --alerte: #d98b6d;
+}
+
+/* ------------------------------------------------------------------ socle */
 
 * {
   box-sizing: border-box;
 }
 
 body {
-  margin: 0 auto;
-  padding: 28px 20px 48px;
-  max-width: 1100px;
+  margin: 0;
   background: var(--papier);
   color: var(--encre);
-  font: 17px/1.55 Georgia, "Iowan Old Style", "Times New Roman", serif;
+  font-family: var(--texte);
+  font-size: 17px;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
 }
 
-header {
-  border-bottom: 2px solid var(--encre);
-  padding-bottom: 14px;
-  margin-bottom: 22px;
-}
-
-h1 {
-  margin: 0;
-  font-size: 1.9rem;
-  letter-spacing: -0.01em;
-}
-
-.sous-titre {
-  margin: 4px 0 0;
-  color: var(--discret);
-  font-size: 0.95rem;
-}
-
-h2 {
-  margin: 0 0 10px;
-  font-size: 0.72rem;
-  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--discret);
-  font-weight: 600;
-}
-
-.discret {
-  color: var(--discret);
-  text-transform: none;
-  letter-spacing: 0;
-  font-weight: 400;
-}
-
-/* ---------------------------------------------------------- les compteurs */
-
-.score {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-  gap: 1px;
-  background: var(--filet);
-  border: 1px solid var(--filet);
-  border-radius: var(--rayon);
-  overflow: hidden;
-  margin-bottom: 22px;
-}
-
-.compteur {
-  background: var(--surface);
-  padding: 12px 16px;
-}
-
-.compteur .valeur {
-  display: block;
-  font-size: 1.5rem;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-  line-height: 1.1;
-}
-
-.compteur .libelle {
-  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
-  font-size: 0.62rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--discret);
-}
-
-/* ------------------------------------------------------- la mise en page */
-
-main {
-  display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(250px, 1fr);
-  gap: 20px;
-  align-items: start;
-}
-
-@media (max-width: 860px) {
-  main {
-    grid-template-columns: 1fr;
-  }
-}
-
-.panneau {
-  background: var(--surface);
-  border: 1px solid var(--filet);
-  border-radius: var(--rayon);
-  padding: 16px;
-}
-
-/* ------------------------------------------------------------- la carte */
-
-.carte {
-  display: grid;
-  grid-template-columns: repeat(var(--largeur, 14), 1fr);
-  gap: 1px;
-  background: var(--filet);
-  border: 1px solid var(--filet);
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.case {
-  aspect-ratio: 1;
-  display: grid;
-  place-items: center;
-  background: var(--surface-creuse);
-  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
-  font-size: clamp(10px, 1.7vw, 15px);
-  font-weight: 700;
-  color: var(--discret);
-}
-
-.case.mur {
-  background: var(--mur);
-}
-
-.case.chemin {
-  background: var(--vert-pale);
-}
-
-.case.pizzeria {
-  background: var(--vert);
-  color: #ffffff;
-}
-
-.case.client {
-  background: var(--surface);
-  box-shadow: inset 0 0 0 2px var(--vert);
+a {
   color: var(--vert);
 }
 
-.case.coursier {
-  background: var(--vert-clair);
-  color: #ffffff;
+code {
+  font-family: var(--mono);
+  font-size: 0.84em;
+  background: var(--vert-pale);
+  padding: 0.1em 0.34em;
+  border-radius: 2px;
+  word-break: break-word;
 }
 
-/* ----------------------------------------------------------- les boutons */
+pre {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  line-height: 1.7;
+  background: var(--surface);
+  border: 1px solid var(--filet);
+  border-left: 3px solid var(--filet);
+  border-radius: 3px;
+  padding: 15px 18px;
+  overflow-x: auto;
+  margin: 18px 0;
+}
 
-.commandes-barre {
+pre code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--vert);
+  outline-offset: 2px;
+}
+
+.page {
+  max-width: 820px;
+  margin-inline: auto;
+  padding: 0 24px 90px;
+}
+
+.page.large {
+  max-width: 1100px;
+}
+
+/* --------------------------------------------- la barre de navigation */
+
+.barre {
+  border-bottom: 1px solid var(--filet);
+  background: var(--surface);
+}
+
+.barre .dedans {
+  max-width: 820px;
+  margin-inline: auto;
+  padding: 10px 24px;
   display: flex;
-  gap: 8px;
-  margin-top: 14px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
   flex-wrap: wrap;
 }
+
+.barre .dedans.large {
+  max-width: 1100px;
+}
+
+.barre .marque {
+  font-family: var(--titre);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  color: var(--encre);
+}
+
+.barre nav {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.barre nav a {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--discret);
+  padding: 5px 10px;
+  border-radius: 3px;
+}
+
+.barre nav a:hover {
+  color: var(--vert);
+  background: var(--vert-pale);
+}
+
+.barre nav a[aria-current="page"] {
+  color: var(--vert);
+  background: var(--vert-pale);
+  font-weight: 600;
+}
+
+/* ------------------------------------------------------- le pied de page */
+
+.pied {
+  border-top: 2px solid var(--encre);
+  margin-top: 40px;
+  padding-top: 16px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--discret);
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.pied a {
+  color: var(--discret);
+}
+
+.pied a:hover {
+  color: var(--vert);
+}
+
+/* ------------------------------------------------------ titres communs */
+
+h1 {
+  font-family: var(--titre);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  text-wrap: balance;
+}
+
+h3 {
+  font-family: var(--titre);
+  font-weight: 600;
+  font-size: 1.05rem;
+  margin: 30px 0 10px;
+}
+
+h3 .n {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--discret);
+  margin-right: 9px;
+  font-variant-numeric: tabular-nums;
+}
+
+p {
+  margin: 0 0 15px;
+}
+
+li {
+  margin-bottom: 5px;
+}
+
+/* ---------------------------------------------------- tableaux communs */
+
+.tableau {
+  overflow-x: auto;
+  margin: 0 0 20px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 500px;
+  font-size: 0.89rem;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 9px 14px 9px 0;
+  border-bottom: 1px solid var(--filet);
+  vertical-align: top;
+}
+
+thead th {
+  border-bottom: 1px solid var(--encre);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--discret);
+  font-weight: 500;
+}
+
+td.mono {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* -------------------------------------------------------- encadre commun */
+
+.encadre {
+  border: 1px solid var(--filet);
+  border-left: 3px solid var(--vert);
+  background: var(--vert-pale);
+  padding: 14px 18px;
+  border-radius: 0 3px 3px 0;
+  margin: 0 0 20px;
+  max-width: 68ch;
+}
+
+.encadre p:last-child {
+  margin-bottom: 0;
+}
+
+.encadre .titre {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--vert);
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* ------------------------------------------------------- boutons communs */
 
 button {
   font: inherit;
@@ -201,17 +323,608 @@ button:disabled {
 button.principal {
   background: var(--vert);
   border-color: var(--vert);
-  color: #ffffff;
+  color: var(--papier);
 }
 
 button.principal:hover:not(:disabled) {
-  background: #275a43;
-  color: #ffffff;
+  background: var(--vert-clair);
+  color: var(--papier);
 }
 
-:focus-visible {
-  outline: 2px solid var(--vert);
-  outline-offset: 2px;
+/* =========================================================== LE SUJET ==== */
+
+.page-sujet .bandeau {
+  border-bottom: 2px solid var(--encre);
+  padding: 44px 0 24px;
+  margin-bottom: 30px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 40px;
+  align-items: end;
+}
+
+.page-sujet .surtitre {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--vert);
+  margin: 0 0 14px;
+}
+
+.page-sujet h1 {
+  font-size: clamp(2.3rem, 6vw, 3.3rem);
+  margin: 0 0 14px;
+}
+
+.page-sujet .accroche {
+  margin: 0;
+  max-width: 48ch;
+  color: var(--discret);
+  font-size: 1.02rem;
+}
+
+.page-sujet p,
+.page-sujet ul,
+.page-sujet ol.numerotee {
+  max-width: 68ch;
+}
+
+.page-sujet ul,
+.page-sujet ol.numerotee {
+  margin: 0 0 15px;
+  padding-left: 1.25em;
+}
+
+.page-sujet .amorce {
+  font-family: var(--titre);
+  font-weight: 600;
+  font-size: 1.02rem;
+  max-width: 58ch;
+}
+
+.page-sujet section {
+  margin-bottom: 50px;
+  scroll-margin-top: 20px;
+}
+
+.page-sujet h2 {
+  font-family: var(--titre);
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+  margin: 0 0 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--encre);
+  text-wrap: balance;
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+}
+
+.page-sujet h2 .n {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--vert);
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
+/* le plan du quartier, en vignette */
+.plan {
+  display: grid;
+  grid-template-columns: repeat(14, 12px);
+  gap: 2px;
+  padding: 10px;
+  background: var(--surface);
+  border: 1px solid var(--filet);
+  border-radius: 3px;
+}
+
+.plan i {
+  display: block;
+  aspect-ratio: 1;
+  border-radius: 1px;
+  background: var(--creux);
+}
+
+.plan i.bati {
+  background: var(--mur);
+}
+
+.plan i.route {
+  background: var(--vert-pale);
+}
+
+.plan i.depart,
+.plan i.arrivee {
+  background: var(--vert);
+}
+
+.plan-legende {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--discret);
+  margin: 9px 0 0;
+  text-align: right;
+}
+
+/* les chiffres cles */
+.chiffres {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(115px, 1fr));
+  gap: 1px;
+  background: var(--filet);
+  border: 1px solid var(--filet);
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 0 0 26px;
+}
+
+.chiffres div {
+  background: var(--surface);
+  padding: 13px 15px;
+}
+
+.chiffres dt {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--discret);
+  margin-bottom: 3px;
+}
+
+.chiffres dd {
+  font-family: var(--titre);
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+/* le sommaire */
+.sommaire {
+  border: 1px solid var(--filet);
+  border-radius: 3px;
+  background: var(--surface);
+  padding: 20px 24px;
+  margin-bottom: 52px;
+}
+
+.page-sujet .sommaire h2 {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--discret);
+  margin: 0 0 14px;
+  padding: 0;
+  border: 0;
+  display: block;
+}
+
+.sommaire ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  columns: 2;
+  column-gap: 34px;
+  font-size: 0.93rem;
+}
+
+.sommaire li {
+  break-inside: avoid;
+  margin-bottom: 5px;
+}
+
+.sommaire a {
+  text-decoration: none;
+  color: var(--encre);
+  display: flex;
+  gap: 10px;
+}
+
+.sommaire a:hover {
+  color: var(--vert);
+}
+
+.sommaire .n {
+  font-family: var(--mono);
+  font-size: 0.76rem;
+  color: var(--vert);
+  min-width: 1.5em;
+  padding-top: 0.2em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* la fiche d'une etape */
+.fiche {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
+  gap: 1px;
+  background: var(--filet);
+  border: 1px solid var(--filet);
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 0 0 22px;
+}
+
+.fiche div {
+  background: var(--surface);
+  padding: 11px 14px;
+}
+
+.fiche dt {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--discret);
+  margin-bottom: 2px;
+}
+
+.fiche dd {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  margin: 0;
+  word-break: break-word;
+}
+
+/* le tour de jeu, en quatre temps */
+.phases {
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+  display: grid;
+  gap: 1px;
+  background: var(--filet);
+  border: 1px solid var(--filet);
+  border-radius: 3px;
+  overflow: hidden;
+  max-width: 68ch;
+}
+
+.phases li {
+  background: var(--surface);
+  margin: 0;
+  padding: 13px 18px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 16px;
+}
+
+.phases .n {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--vert);
+  padding-top: 0.3em;
+  font-variant-numeric: tabular-nums;
+}
+
+.phases b {
+  font-family: var(--titre);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.phases .qui {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--discret);
+  display: block;
+  margin-top: 4px;
+}
+
+/* les regles numerotees */
+.regles {
+  counter-reset: regle;
+  list-style: none;
+  padding: 0;
+  max-width: 68ch;
+  margin: 0 0 20px;
+}
+
+.page-sujet .regles li {
+  counter-increment: regle;
+  position: relative;
+  padding: 10px 0 10px 44px;
+  border-bottom: 1px solid var(--filet);
+  margin: 0;
+}
+
+.regles li::before {
+  content: counter(regle);
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  background: var(--vert);
+  color: var(--papier);
+  font-family: var(--mono);
+  font-size: 0.76rem;
+  font-weight: 600;
+  border-radius: 2px;
+}
+
+/* les problemes courants */
+.problemes {
+  list-style: none;
+  padding: 0;
+  max-width: 68ch;
+  margin: 0 0 20px;
+}
+
+.page-sujet .problemes li {
+  padding: 13px 0;
+  border-bottom: 1px solid var(--filet);
+  margin: 0;
+}
+
+.problemes b {
+  font-family: var(--titre);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 3px;
+}
+
+/* la liste de verification du rendu */
+.verif {
+  list-style: none;
+  padding: 0;
+  max-width: 68ch;
+  margin: 0 0 20px;
+}
+
+.page-sujet .verif li {
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 11px;
+}
+
+.verif li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.4em;
+  width: 13px;
+  height: 13px;
+  border: 1.5px solid var(--vert);
+  border-radius: 2px;
+}
+
+/* les ressources */
+.ressources {
+  margin: 0 0 20px;
+  display: grid;
+  gap: 1px;
+  background: var(--filet);
+  border: 1px solid var(--filet);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.ressources > div {
+  background: var(--surface);
+  padding: 11px 16px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+  gap: 18px;
+  align-items: baseline;
+}
+
+.ressources dt {
+  color: var(--discret);
+  font-size: 0.9rem;
+}
+
+.ressources dd {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.ressources dd a {
+  text-decoration: none;
+  border-bottom: 1px solid var(--filet);
+}
+
+.ressources dd a:hover {
+  border-bottom-color: var(--vert);
+}
+
+/* les deux autres pages, presentees depuis le sujet */
+.interfaces {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1px;
+  background: var(--filet);
+  border: 1px solid var(--filet);
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 0 0 26px;
+  list-style: none;
+  padding: 0;
+}
+
+.interfaces li {
+  background: var(--surface);
+  padding: 16px 18px;
+  margin: 0;
+}
+
+.interfaces .lien {
+  font-family: var(--titre);
+  font-weight: 600;
+  font-size: 1.02rem;
+  text-decoration: none;
+  color: var(--vert);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.interfaces .lien:hover {
+  text-decoration: underline;
+}
+
+.interfaces p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--discret);
+}
+
+/* ============================================================= LE JEU ==== */
+
+.page-jeu .entete,
+.page-tests .entete {
+  border-bottom: 2px solid var(--encre);
+  padding: 32px 0 16px;
+  margin-bottom: 22px;
+}
+
+.page-jeu h1,
+.page-tests h1 {
+  font-size: 1.9rem;
+  margin: 0 0 6px;
+}
+
+.page-jeu .sous-titre,
+.page-tests .sous-titre {
+  margin: 0;
+  color: var(--discret);
+  font-size: 0.95rem;
+  max-width: 70ch;
+}
+
+.page-jeu h2,
+.page-tests h2 {
+  margin: 0 0 10px;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--discret);
+  font-weight: 600;
+}
+
+.discret {
+  color: var(--discret);
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+
+/* les compteurs */
+.score {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 1px;
+  background: var(--filet);
+  border: 1px solid var(--filet);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 22px;
+}
+
+.compteur {
+  background: var(--surface);
+  padding: 12px 16px;
+}
+
+.compteur .valeur {
+  display: block;
+  font-family: var(--titre);
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.compteur .libelle {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--discret);
+}
+
+/* la mise en page du jeu */
+main {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(250px, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.panneau {
+  background: var(--surface);
+  border: 1px solid var(--filet);
+  border-radius: 3px;
+  padding: 16px;
+}
+
+/* la carte */
+.carte {
+  display: grid;
+  grid-template-columns: repeat(var(--largeur, 14), 1fr);
+  gap: 1px;
+  background: var(--filet);
+  border: 1px solid var(--filet);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.case {
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  background: var(--creux);
+  font-family: var(--mono);
+  font-size: clamp(10px, 1.7vw, 15px);
+  font-weight: 600;
+  color: var(--discret);
+}
+
+.case.mur {
+  background: var(--mur);
+}
+
+.case.chemin {
+  background: var(--vert-pale);
+}
+
+.case.pizzeria {
+  background: var(--vert);
+  color: var(--papier);
+}
+
+.case.client {
+  background: var(--surface);
+  box-shadow: inset 0 0 0 2px var(--vert);
+  color: var(--vert);
+}
+
+.case.coursier {
+  background: var(--vert-clair);
+  color: var(--papier);
+}
+
+.commandes-barre {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+  flex-wrap: wrap;
 }
 
 .legende {
@@ -231,20 +944,20 @@ button.principal:hover:not(:disabled) {
   height: 20px;
   border-radius: 3px;
   margin-right: 4px;
-  background: var(--surface-creuse);
-  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  background: var(--creux);
+  font-family: var(--mono);
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .pastille.pizzeria {
   background: var(--vert);
-  color: #ffffff;
+  color: var(--papier);
 }
 
 .pastille.coursier {
   background: var(--vert-clair);
-  color: #ffffff;
+  color: var(--papier);
 }
 
 .pastille.client {
@@ -257,8 +970,7 @@ button.principal:hover:not(:disabled) {
   background: var(--mur);
 }
 
-/* ------------------------------------------------------------ les listes */
-
+/* les listes du jeu */
 .liste {
   list-style: none;
   margin: 0 0 22px;
@@ -271,6 +983,7 @@ button.principal:hover:not(:disabled) {
   padding: 9px 0;
   font-size: 0.88rem;
   border-bottom: 1px solid var(--filet);
+  margin: 0;
 }
 
 .liste li:last-child {
@@ -297,10 +1010,10 @@ button.principal:hover:not(:disabled) {
   height: 20px;
   border-radius: 3px;
   background: var(--vert-clair);
-  color: #ffffff;
-  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  color: var(--papier);
+  font-family: var(--mono);
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 600;
   margin-right: 8px;
   vertical-align: -4px;
 }
@@ -326,8 +1039,7 @@ button.principal:hover:not(:disabled) {
   font-style: italic;
 }
 
-/* ------------------------------------------------------------ le journal */
-
+/* le journal du service */
 .journal-panneau {
   margin-top: 20px;
 }
@@ -368,19 +1080,7 @@ button.principal:hover:not(:disabled) {
   border-left-color: var(--encre);
 }
 
-footer {
-  margin-top: 26px;
-  padding-top: 14px;
-  border-top: 1px solid var(--filet);
-  font-size: 0.85rem;
-  color: var(--discret);
-}
-
-footer a {
-  color: var(--vert);
-}
-
-/* -------------------------------------------------------- page des tests */
+/* =========================================================== LES TESTS === */
 
 .resultats {
   font-size: 0.9rem;
@@ -388,7 +1088,7 @@ footer a {
 
 .resultats .suite-titre {
   margin: 22px 0 8px;
-  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-family: var(--mono);
   font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -403,7 +1103,7 @@ footer a {
 }
 
 .resultats .test .etat {
-  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-family: var(--mono);
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -429,7 +1129,7 @@ footer a {
 .resultats .message {
   display: block;
   color: var(--alerte);
-  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-family: var(--mono);
   font-size: 0.78rem;
   margin-top: 4px;
 }
@@ -438,8 +1138,8 @@ footer a {
   font-size: 1.05rem;
   font-weight: 700;
   padding: 12px 16px;
-  border-radius: var(--rayon);
-  background: var(--surface-creuse);
+  border-radius: 3px;
+  background: var(--creux);
   border-left: 4px solid var(--filet);
 }
 
@@ -452,4 +1152,35 @@ footer a {
 .bilan.des-rouges {
   color: var(--alerte);
   border-left-color: var(--alerte);
+}
+
+/* ------------------------------------------------------------- ecrans etroits */
+
+@media (max-width: 860px) {
+  main {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .page-sujet .bandeau {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+  .plan {
+    grid-template-columns: repeat(14, 1fr);
+    max-width: 300px;
+  }
+  .sommaire ol {
+    columns: 1;
+  }
+  .page-sujet h2 {
+    flex-direction: column;
+    gap: 3px;
+  }
+  .ressources > div {
+    grid-template-columns: 1fr;
+    gap: 3px;
+  }
 }
