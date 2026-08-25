@@ -1,8 +1,7 @@
 # Pizza Rush
 
 Jeu de livraison de pizzas fonctionnant dans un navigateur, en HTML, CSS et
-JavaScript, sans bibliotheque exterieure. Projet d'apprentissage individuel de
-cinq a six heures.
+JavaScript, sans bibliotheque exterieure.
 
 Le jeu en une phrase : des clients commandent des pizzas, vos coursiers partent
 de la pizzeria et les livrent, et une livraison rapporte d'autant plus de points
@@ -71,12 +70,12 @@ Le squelette est fourni : toutes les fonctions existent, documentees, avec un
 grep -rn "TODO" src/ tests/test_4_les_votres.js
 ```
 
-| Etape | Fichier a ecrire | Notions | Tests | Duree |
-| --- | --- | --- | --- | --- |
-| 1 | `src/modeles.js` | classes, heritage, validation | 15 | 1 h 15 |
-| 2 | `src/algos.js` | grille, parcours en largeur, choix du coursier | 13 | 2 h |
-| 3 | `src/jeu.js` | fetch, codes HTTP, regles du jeu | 15 | 1 h 45 |
-| 4 | `tests/test_4_les_votres.js` | ecriture de tests | 2 minimum | 30 min |
+| Etape | Fichier a ecrire | Notions | Tests |
+| --- | --- | --- | --- |
+| 1 | `src/modeles.js` | classes, heritage, validation | 15 |
+| 2 | `src/algos.js` | grille, parcours en largeur, choix du coursier | 13 |
+| 3 | `src/jeu.js` | fetch, codes HTTP, regles du jeu | 15 |
+| 4 | `tests/test_4_les_votres.js` | ecriture de tests | 2 minimum |
 
 `src/vue.js` et `src/main.js` sont fournis : ils constituent la vue et le
 controleur, le reste du projet formant le modele. Les tests fournis ne se

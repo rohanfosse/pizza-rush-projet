@@ -24,6 +24,7 @@
           <a href="index.html" aria-current="page">Le sujet</a>
           <a href="jeu.html">Le jeu</a>
           <a href="tests.html">Les tests</a>
+          <a href="verifier.html">Verifier mon code</a>
         </nav>
       </div>
     </header>
@@ -46,8 +47,6 @@
   </header>
 
   <dl class="chiffres">
-    <div><dt>Durée</dt><dd>5 à 6 h</dd></div>
-    <div><dt>Travail</dt><dd>Individuel</dd></div>
     <div><dt>Étapes</dt><dd>4</dd></div>
     <div><dt>Tests fournis</dt><dd>43</dd></div>
     <div><dt>Fichiers à écrire</dt><dd>4</dd></div>
@@ -64,8 +63,8 @@
   </div>
 
   <p>
-    Le projet tient en trois pages, qui partagent la même feuille de style. Vous lisez la première :
-    le sujet. Les deux autres servent pendant que vous codez.
+    Le projet tient en quatre pages, qui partagent la même feuille de style. Vous lisez la
+    première : le sujet. Les trois autres servent pendant que vous codez.
   </p>
   <ul class="interfaces">
     <li>
@@ -80,6 +79,13 @@
       <p>
         Les 43 tests fournis, lancés dans le navigateur. Le premier test rouge est votre prochaine
         étape. En console, la même chose avec <code>npm test</code>.
+      </p>
+    </li>
+    <li>
+      <a class="lien" href="verifier.html">Vérifier mon code</a>
+      <p>
+        Vous chargez vos trois fichiers et les 43 tests s'exécutent contre votre code, ici, sans
+        rien installer. Utile depuis une machine où vous ne pouvez pas lancer de serveur.
       </p>
     </li>
   </ul>
@@ -518,6 +524,7 @@ points = (30 - delai) x nombre de pizzas, et jamais moins de zero</code></pre>
     index.html                FOURNI  le sujet, la page d'accueil
     jeu.html                  FOURNI  le jeu
     tests.html                FOURNI  les tests dans le navigateur
+    verifier.html             FOURNI  vos fichiers testes en ligne
     style.css                 FOURNI  l'habillage des trois pages
     package.json              FOURNI  pour npm test
     donnees/
@@ -580,7 +587,6 @@ export function cle(position) {
             <th>Fichier</th>
             <th>À écrire</th>
             <th>Tests</th>
-            <th>Durée</th>
           </tr>
         </thead>
         <tbody>
@@ -594,7 +600,6 @@ export function cle(position) {
               <code>Velo</code> et <code>Scooter</code>
             </td>
             <td class="mono">15</td>
-            <td class="mono">1 h 15</td>
           </tr>
           <tr>
             <td class="mono">2</td>
@@ -605,7 +610,6 @@ export function cle(position) {
               <code>coursierLePlusProche</code>
             </td>
             <td class="mono">13</td>
-            <td class="mono">2 h</td>
           </tr>
           <tr>
             <td class="mono">3</td>
@@ -616,14 +620,12 @@ export function cle(position) {
               <code>assigner</code>, <code>avancer</code>, <code>tour</code>, <code>points</code>
             </td>
             <td class="mono">15</td>
-            <td class="mono">1 h 45</td>
           </tr>
           <tr>
             <td class="mono">4</td>
             <td class="mono">tests/test_4_les_votres.js</td>
             <td>au moins deux tests à vous</td>
             <td class="mono">2 mini</td>
-            <td class="mono">30 min</td>
           </tr>
         </tbody>
       </table>
@@ -666,6 +668,25 @@ Prochaine chose a faire : Error : etape 1 : le constructeur de Commande</code></
         Les 43 tests échouent, et la page du jeu affiche une erreur nommant la première fonction
         manquante. C'est normal, c'est le point de départ. Si c'est ce que vous voyez, votre
         environnement fonctionne.
+      </p>
+    </div>
+
+    <h3><span class="n">4.4</span>Sans rien installer</h3>
+    <p>
+      Si vous ne pouvez pas lancer de serveur local, sur une machine de l'école par exemple, la page
+      <a href="verifier.html">Vérifier mon code</a> fait le travail : vous y déposez vos fichiers
+      <code>modeles.js</code>, <code>algos.js</code> et <code>jeu.js</code>, les 43 tests
+      s'exécutent contre votre code, et un bouton lance la partie avec vos fonctions.
+    </p>
+    <p>
+      Tout se passe dans votre navigateur : votre code n'est ni envoyé au serveur, ni enregistré
+      quelque part. Pensez seulement à recharger vos fichiers après chaque modification, la page ne
+      les surveille pas toute seule.
+    </p>
+    <div class="encadre">
+      <p>
+        Cette page dépanne, elle ne remplace pas le serveur local. Vous travaillez plus vite avec
+        votre éditeur, <code>npm test</code> dans un terminal et le jeu dans un onglet.
       </p>
     </div>
   </section>
@@ -838,7 +859,6 @@ return null;</code></pre>
       <div><dt>Fichier</dt><dd>src/modeles.js</dd></div>
       <div><dt>Tests</dt><dd>test_1_modeles.js</dd></div>
       <div><dt>Nombre</dt><dd>15</dd></div>
-      <div><dt>Durée</dt><dd>1 h 15</dd></div>
     </dl>
     <p>
       Cette étape crée les objets du jeu : une commande, un coursier, et deux types de coursiers.
@@ -1032,7 +1052,6 @@ avancer() -> position (5,0), chemin = []                      renvoie true</code
       <div><dt>Fichier</dt><dd>src/algos.js</dd></div>
       <div><dt>Tests</dt><dd>test_2_algos.js</dd></div>
       <div><dt>Nombre</dt><dd>13</dd></div>
-      <div><dt>Durée</dt><dd>2 h</dd></div>
     </dl>
     <p>
       Six fonctions, dont aucune ne modifie ses arguments : elles reçoivent des données et renvoient
@@ -1262,7 +1281,6 @@ RECONSTRUIRE :
       <div><dt>Fichier</dt><dd>src/jeu.js</dd></div>
       <div><dt>Tests</dt><dd>test_3_jeu.js</dd></div>
       <div><dt>Nombre</dt><dd>15</dd></div>
-      <div><dt>Durée</dt><dd>1 h 45</dd></div>
     </dl>
     <p>
       Deux sujets distincts dans le même fichier : charger les données depuis le réseau, puis
@@ -1471,7 +1489,6 @@ await assert.rejects(chargerJson("nulle-part.json", fauxFetch(404, {})), /404/);
     <dl class="fiche">
       <div><dt>Fichier</dt><dd>tests/test_4_les_votres.js</dd></div>
       <div><dt>Minimum</dt><dd>2 tests</dd></div>
-      <div><dt>Durée</dt><dd>30 min</dd></div>
     </dl>
     <p>
       Écrivez au moins deux tests qui vérifient un comportement non couvert par les tests fournis. Le
@@ -1829,7 +1846,7 @@ await assert.rejects(chargerJson("nulle-part.json", fauxFetch(404, {})), /404/);
 
   <footer class="pied">
     <span>Pizza Rush</span>
-    <span><a href="index.html">Le sujet</a> · <a href="jeu.html">Le jeu</a> · <a href="tests.html">Les tests</a></span>
+    <span><a href="index.html">Le sujet</a> · <a href="jeu.html">Le jeu</a> · <a href="tests.html">Les tests</a> · <a href="verifier.html">Verifier mon code</a></span>
     <span>43 tests, 4 etapes</span>
   </footer>
 </div>

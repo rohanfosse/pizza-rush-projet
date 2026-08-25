@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pizza Rush, verifier mon code</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='5' fill='%232f6b4f'/><text x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-size='20' fill='%23ffffff'>V</text></svg>"
+    />
+  </head>
+  <body class="page-tests page-verif">
+    <header class="barre">
+      <div class="dedans">
+        <a class="marque" href="index.html">Pizza Rush</a>
+        <nav>
+          <a href="index.html">Le sujet</a>
+          <a href="jeu.html">Le jeu</a>
+          <a href="tests.html">Les tests</a>
+          <a href="verifier.html" aria-current="page">Verifier mon code</a>
+        </nav>
+      </div>
+    </header>
+
+    <div class="page">
+      <header class="entete">
+        <h1>Vérifier mon code</h1>
+        <p class="sous-titre">
+          Chargez vos fichiers <code>modeles.js</code>, <code>algos.js</code> et <code>jeu.js</code>,
+          et les 43 tests s'exécutent ici, dans votre navigateur, contre votre code. Aucun serveur à
+          installer. Votre code ne quitte pas votre machine : rien n'est envoyé, rien n'est
+          enregistré.
+        </p>
+      </header>
+
+      <section class="panneau">
+        <h2>Vos fichiers</h2>
+        <div id="depot" class="depot">
+          <p class="depot-titre">Glissez vos fichiers ici</p>
+          <p class="depot-detail">
+            ou choisissez-les à la main. On attend <code>modeles.js</code>, <code>algos.js</code> et
+            <code>jeu.js</code>. Vous pouvez ajouter <code>test_4_les_votres.js</code> pour lancer
+            aussi vos propres tests.
+          </p>
+          <div class="commandes-barre">
+            <button type="button" id="choisir-fichiers">Choisir mes fichiers</button>
+            <button type="button" id="choisir-dossier">Choisir mon dossier src</button>
+            <button type="button" id="prendre-squelette" class="discret-bouton">
+              Essayer avec le squelette fourni
+            </button>
+          </div>
+          <input id="entree-fichiers" type="file" accept=".js" multiple hidden />
+          <input id="entree-dossier" type="file" webkitdirectory directory hidden />
+        </div>
+
+        <ul id="fichiers" class="fichiers"></ul>
+
+        <div class="commandes-barre">
+          <button type="button" id="lancer" class="principal" disabled>Lancer les 43 tests</button>
+          <button type="button" id="jouer" disabled>Jouer avec mon code</button>
+        </div>
+      </section>
+
+      <section class="panneau">
+        <h2>Résultat</h2>
+        <div id="bilan" class="bilan">Aucun fichier chargé pour l'instant.</div>
+        <div id="resultats" class="resultats"></div>
+      </section>
+
+      <section class="panneau" id="panneau-jeu" hidden>
+        <h2>Votre partie</h2>
+        <p class="sous-titre">
+          Le jeu ci-dessous tourne avec vos trois fichiers. Rechargez vos fichiers puis relancez pour
+          voir l'effet d'une correction.
+        </p>
+        <iframe id="cadre-jeu" class="cadre-jeu" title="Le jeu avec votre code"></iframe>
+      </section>
+
+      <footer class="pied">
+        <span>Pizza Rush</span>
+        <span>
+          <a href="index.html">Le sujet</a> · <a href="jeu.html">Le jeu</a> ·
+          <a href="tests.html">Les tests</a> · <a href="verifier.html">Verifier mon code</a>
+        </span>
+        <span>43 tests, 4 etapes</span>
+      </footer>
+    </div>
+
+    <script>
+      // Cette page fait tourner VOTRE code sans rien installer.
+      //
+      // Le principe, si la curiosite vous prend : vos fichiers sont transformes en
+      // modules ephemeres (des URL blob:), et une carte d'import (importmap) dit au
+      // navigateur que /src/modeles.js, /src/algos.js et /src/jeu.js designent
+      // desormais vos modules. Les tests fournis, eux, ne changent pas : ils
+      // importent toujours "../src/modeles.js", mais c'est votre code qui repond.
+      // Tout se passe dans un cadre isole, recree a chaque essai pour repartir d'un
+      // etat propre.
+
+      const NOMS = ["modeles.js", "algos.js", "jeu.js"];
+      const NOM_TEST4 = "test_4_les_votres.js";
+      const DELAI_MAX_MS = 15000;
+
+      const sources = {};
+      let cadreTests = null;
+      let minuteur = null;
+
+      const $ = (sel) => document.querySelector(sel);
+      const listeFichiers = $("#fichiers");
+      const bilan = $("#bilan");
+      const resultats = $("#resultats");
+      const boutonLancer = $("#lancer");
+      const boutonJouer = $("#jouer");
+
+      /* ------------------------------------------------ lecture des fichiers */
+
+      async function prendre(fichiers) {
+        const attendus = NOMS.concat([NOM_TEST4]);
+        const retenus = [];
+        for (const fichier of fichiers) {
+          if (attendus.indexOf(fichier.name) === -1) continue;
+          sources[fichier.name] = await fichier.text();
+          retenus.push(fichier.name);
+        }
+        if (retenus.length === 0) {
+          message("Aucun fichier reconnu. Les noms attendus sont modeles.js, algos.js et jeu.js.", true);
+        }
+        majEtat();
+      }
+
+      async function prendreLeSquelette() {
+        for (const nom of NOMS) {
+          const reponse = await fetch("src/" + nom, { cache: "no-store" });
+          sources[nom] = await reponse.text();
+        }
+        delete sources[NOM_TEST4];
+        majEtat();
+        message("Squelette fourni chargé : les 43 tests doivent échouer, c'est le point de départ.");
+      }
+
+      function majEtat() {
+        const lignes = NOMS.concat([NOM_TEST4]).map((nom) => {
+          const present = typeof sources[nom] === "string";
+          const facultatif = nom === NOM_TEST4;
+          const etat = present ? "charge" : facultatif ? "facultatif" : "manquant";
+          const taille = present ? Math.round(sources[nom].length / 100) / 10 + " ko" : "";
+          return (
+            '<li class="' +
+            (present ? "present" : "absent") +
+            '"><span class="etat">' +
+            etat +
+            '</span><span class="nom">' +
+            nom +
+            '</span><span class="taille">' +
+            taille +
+            "</span></li>"
+          );
+        });
+        listeFichiers.innerHTML = lignes.join("");
+        const complet = NOMS.every((nom) => typeof sources[nom] === "string");
+        boutonLancer.disabled = !complet;
+        boutonJouer.disabled = !complet;
+        if (complet && bilan.textContent.indexOf("Aucun fichier") === 0) {
+          message("Vos trois fichiers sont là. Lancez les tests.");
+        }
+      }
+
+      function message(texte, erreur) {
+        bilan.className = "bilan" + (erreur ? " des-rouges" : "");
+        bilan.textContent = texte;
+      }
+
+      /* --------------------------------------- fabrication des modules blob */
+
+      // Vos fichiers s'importent entre eux ("./algos.js"). Dans un module blob:
+      // ces chemins relatifs ne veulent plus rien dire, on les remplace donc par
+      // l'adresse du blob correspondant.
+      function reecrireImports(code, dejaFaits) {
+        return code
+          .replace(/(["'])\.\/(modeles|algos|jeu)\.js\1/g, function (tout, guillemet, nom) {
+            return guillemet + (dejaFaits[nom + ".js"] || "/src/" + nom + ".js") + guillemet;
+          })
+          .replace(/(["'])\.\.\/src\/(modeles|algos|jeu)\.js\1/g, function (tout, guillemet, nom) {
+            return guillemet + (dejaFaits[nom + ".js"] || "/src/" + nom + ".js") + guillemet;
+          })
+          .replace(/(["'])\.\/mini\.js\1/g, function (tout, guillemet) {
+            return guillemet + new URL("tests/mini.js", location.href).href + guillemet;
+          });
+      }
+
+      function fabriquerModules() {
+        const urls = {};
+        // L'ordre compte : jeu.js importe algos.js et modeles.js, il faut donc
+        // que leurs adresses existent avant de le fabriquer.
+        for (const nom of NOMS) {
+          const code = reecrireImports(sources[nom], urls);
+          urls[nom] = URL.createObjectURL(new Blob([code], { type: "text/javascript" }));
+        }
+        if (typeof sources[NOM_TEST4] === "string") {
+          const code = reecrireImports(sources[NOM_TEST4], urls);
+          urls[NOM_TEST4] = URL.createObjectURL(new Blob([code], { type: "text/javascript" }));
+        }
+        return urls;
+      }
+
+      function carteDImport(urls) {
+        const imports = {};
+        for (const nom of NOMS) {
+          imports[new URL("src/" + nom, location.href).href] = urls[nom];
+        }
+        return JSON.stringify({ imports: imports });
+      }
+
+      /* ------------------------------------------------- lancement des tests */
+
+      function lancerLesTests() {
+        nettoyer();
+        const urls = fabriquerModules();
+        const test4 = urls[NOM_TEST4] || new URL("tests/test_4_les_votres.js", location.href).href;
+
+        const page =
+          '<!doctype html><meta charset="utf-8">' +
+          '<script type="importmap">' +
+          carteDImport(urls) +
+          "<\/script>" +
+          '<script type="module">' +
+          "(async () => {" +
+          '  const envoyer = (m) => parent.postMessage(m, "*");' +
+          "  try {" +
+          '    const mini = await import("' + new URL("tests/mini.js", location.href).href + '");' +
+          '    await import("' + new URL("tests/test_1_modeles.js", location.href).href + '");' +
+          '    await import("' + new URL("tests/test_2_algos.js", location.href).href + '");' +
+          '    await import("' + new URL("tests/test_3_jeu.js", location.href).href + '");' +
+          '    await import("' + test4 + '");' +
+          "    const rapport = await mini.lancer();" +
+          "    envoyer({" +
+          '      pizza: "resultats",' +
+          "      suites: rapport.map((s) => ({" +
+          "        nom: s.nom," +
+          "        resultats: s.resultats.map((r) => ({" +
+          "          nom: r.nom," +
+          "          ok: r.ok," +
+          '          message: r.ok ? "" : mini.decrireErreur(r.erreur),' +
+          "        }))," +
+          "      }))," +
+          "    });" +
+          "  } catch (erreur) {" +
+          '    envoyer({ pizza: "erreur", message: String((erreur && erreur.message) || erreur) });' +
+          "  }" +
+          "})();" +
+          "<\/script>";
+
+        cadreTests = document.createElement("iframe");
+        cadreTests.hidden = true;
+        cadreTests.srcdoc = page;
+        document.body.append(cadreTests);
+
+        message("Exécution en cours.");
+        minuteur = setTimeout(function () {
+          nettoyer();
+          message(
+            "Aucune réponse après 15 secondes. Le plus souvent, c'est une boucle qui ne se termine " +
+              "pas : dans plusCourtChemin, une case remise dans la file à chaque passage.",
+            true,
+          );
+        }, DELAI_MAX_MS);
+      }
+
+      function nettoyer() {
+        if (minuteur) clearTimeout(minuteur);
+        minuteur = null;
+        if (cadreTests) cadreTests.remove();
+        cadreTests = null;
+        resultats.replaceChildren();
+      }
+
+      window.addEventListener("message", function (evenement) {
+        if (!cadreTests || evenement.source !== cadreTests.contentWindow) return;
+        const donnees = evenement.data;
+        if (!donnees || !donnees.pizza) return;
+        clearTimeout(minuteur);
+        minuteur = null;
+
+        if (donnees.pizza === "erreur") {
+          message("Votre code n'a pas pu être chargé : " + donnees.message, true);
+          return;
+        }
+        afficher(donnees.suites);
+      });
+
+      function afficher(suites) {
+        const tous = [];
+        for (const suite of suites) {
+          const titre = document.createElement("div");
+          titre.className = "suite-titre";
+          titre.textContent = suite.nom;
+          resultats.append(titre);
+          for (const r of suite.resultats) {
+            tous.push(r);
+            const ligne = document.createElement("div");
+            ligne.className = "test " + (r.ok ? "ok" : "ko");
+            const etat = document.createElement("span");
+            etat.className = "etat";
+            etat.textContent = r.ok ? "ok" : "KO";
+            ligne.append(etat, document.createTextNode(r.nom));
+            if (!r.ok) {
+              const m = document.createElement("span");
+              m.className = "message";
+              m.textContent = r.message;
+              ligne.append(m);
+            }
+            resultats.append(ligne);
+          }
+        }
+        const rates = tous.filter((r) => !r.ok);
+        if (tous.length === 0) {
+          message("Aucun test n'a été trouvé.", true);
+        } else if (rates.length === 0) {
+          bilan.className = "bilan tout-vert";
+          bilan.textContent = tous.length + " tests, tout est vert.";
+        } else {
+          bilan.className = "bilan des-rouges";
+          bilan.textContent =
+            rates.length + " rate(s) sur " + tous.length + ". Prochaine etape : " + rates[0].nom;
+        }
+      }
+
+      /* ------------------------------------------------ le jeu avec ce code */
+
+      async function jouerAvecMonCode() {
+        const urls = fabriquerModules();
+        const reponse = await fetch("jeu.html", { cache: "no-store" });
+        const html = await reponse.text();
+        const injection =
+          '<base href="' +
+          new URL(".", location.href).href +
+          '">' +
+          '<script type="importmap">' +
+          carteDImport(urls) +
+          "<\/script>";
+        const page = html.replace("<head>", "<head>" + injection);
+        $("#panneau-jeu").hidden = false;
+        $("#cadre-jeu").srcdoc = page;
+        $("#panneau-jeu").scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      /* ------------------------------------------------------- les branchements */
+
+      $("#choisir-fichiers").addEventListener("click", () => $("#entree-fichiers").click());
+      $("#choisir-dossier").addEventListener("click", () => $("#entree-dossier").click());
+      $("#entree-fichiers").addEventListener("change", (e) => prendre(e.target.files));
+      $("#entree-dossier").addEventListener("change", (e) => prendre(e.target.files));
+      $("#prendre-squelette").addEventListener("click", prendreLeSquelette);
+      boutonLancer.addEventListener("click", lancerLesTests);
+      boutonJouer.addEventListener("click", jouerAvecMonCode);
+
+      const depot = $("#depot");
+      ["dragenter", "dragover"].forEach((type) =>
+        depot.addEventListener(type, (e) => {
+          e.preventDefault();
+          depot.classList.add("survol");
+        }),
+      );
+      ["dragleave", "drop"].forEach((type) =>
+        depot.addEventListener(type, (e) => {
+          e.preventDefault();
+          depot.classList.remove("survol");
+        }),
+      );
+      depot.addEventListener("drop", (e) => prendre(e.dataTransfer.files));
+
+      majEtat();
+
+      // Petit crochet pour verifier la page automatiquement : ?essai=squelette
+      // charge le squelette fourni et lance les tests tout seul.
+      if (location.search.indexOf("essai=squelette") !== -1) {
+        prendreLeSquelette().then(lancerLesTests);
+      }
+    </script>
+  </body>
+</html>

@@ -18,15 +18,14 @@ et un dépôt Git avec un commit par étape.
 `43 tests, tout est vert.` et le service se joue en entier dans le navigateur,
 jusqu'au message `Service termine`.
 
-**Durée** : 5 à 6 heures. **Travail individuel.**
-
-**Les trois pages du projet**, qui partagent la même feuille de style :
+**Les quatre pages du projet**, qui partagent la même feuille de style :
 
 | Page | À quoi elle sert |
 | --- | --- |
 | `index.html` | ce sujet, la page d'accueil |
 | `jeu.html` | le jeu : la carte, les coursiers, le journal du service. Tant qu'une fonction n'est pas écrite, le journal affiche son nom |
 | `tests.html` | les 43 tests dans le navigateur. Le premier test rouge est votre prochaine étape |
+| `verifier.html` | vos fichiers déposés dans la page, les 43 tests exécutés contre votre code, sans rien installer |
 
 ---
 
@@ -35,13 +34,13 @@ jusqu'au message `Service termine`.
 1. [Le projet en bref](#1-le-projet-en-bref)
 2. [Les règles du jeu](#2-les-règles-du-jeu)
 3. [Ce qui est fourni, ce que vous écrivez](#3-ce-qui-est-fourni-ce-que-vous-écrivez)
-4. [Mise en route](#4-mise-en-route-5-minutes)
+4. [Mise en route](#4-mise-en-route)
 5. [Comment travailler : le cycle des tests](#5-comment-travailler--le-cycle-des-tests)
 6. [Conventions et règles de codage](#6-conventions-et-règles-de-codage)
-7. [Étape 1 : les modèles](#7-étape-1--les-modèles-1-h-15)
-8. [Étape 2 : les algorithmes](#8-étape-2--les-algorithmes-2-h)
-9. [Étape 3 : le réseau et la partie](#9-étape-3--le-réseau-et-la-partie-1-h-45)
-10. [Étape 4 : vos propres tests](#10-étape-4--vos-propres-tests-30-min)
+7. [Étape 1 : les modèles](#7-étape-1--les-modèles)
+8. [Étape 2 : les algorithmes](#8-étape-2--les-algorithmes)
+9. [Étape 3 : le réseau et la partie](#9-étape-3--le-réseau-et-la-partie)
+10. [Étape 4 : vos propres tests](#10-étape-4--vos-propres-tests)
 11. [L'architecture du projet (MVC)](#11-larchitecture-du-projet-mvc)
 12. [Ce qui est attendu au rendu](#12-ce-qui-est-attendu-au-rendu)
 13. [Problèmes courants](#13-problèmes-courants)
@@ -318,6 +317,7 @@ pizza-rush/
     index.html                FOURNI  le sujet, la page d'accueil
     jeu.html                  FOURNI  le jeu
     tests.html                FOURNI  les tests dans le navigateur
+    verifier.html             FOURNI  vos fichiers testes en ligne
     style.css                 FOURNI  l'habillage des trois pages
     package.json              FOURNI  pour npm test
     donnees/
@@ -377,19 +377,19 @@ grep -rn "TODO" src/ tests/test_4_les_votres.js
 
 ### 3.3 La carte de ce qu'il y a à écrire
 
-| Étape | Fichier | À écrire | Tests | Durée |
-| --- | --- | --- | --- | --- |
-| 1 | `src/modeles.js` | `Commande` (constructeur, `nbPizzas`, `toString`), `Coursier` (constructeur, `estLibre`, `charger`, `avancer`, `livrer`, `toString`), `Velo`, `Scooter` | 15 | 1 h 15 |
-| 2 | `src/algos.js` | `cle`, `estLibre`, `voisins`, `plusCourtChemin`, `itineraire`, `coursierLePlusProche` | 13 | 2 h |
-| 3 | `src/jeu.js` | `chargerJson`, `chargerQuartier`, `chargerCommandes`, `Partie` (constructeur, `ajouterCommande`, `assigner`, `avancer`, `tour`, `points`) | 15 | 1 h 45 |
-| 4 | `tests/test_4_les_votres.js` | au moins 2 tests à vous | 2 minimum | 30 min |
+| Étape | Fichier | À écrire | Tests |
+| --- | --- | --- | --- |
+| 1 | `src/modeles.js` | `Commande` (constructeur, `nbPizzas`, `toString`), `Coursier` (constructeur, `estLibre`, `charger`, `avancer`, `livrer`, `toString`), `Velo`, `Scooter` | 15 |
+| 2 | `src/algos.js` | `cle`, `estLibre`, `voisins`, `plusCourtChemin`, `itineraire`, `coursierLePlusProche` | 13 |
+| 3 | `src/jeu.js` | `chargerJson`, `chargerQuartier`, `chargerCommandes`, `Partie` (constructeur, `ajouterCommande`, `assigner`, `avancer`, `tour`, `points`) | 15 |
+| 4 | `tests/test_4_les_votres.js` | au moins 2 tests à vous | 2 minimum |
 
 Les étapes se font dans l'ordre : l'étape 2 utilise les classes de l'étape 1,
 l'étape 3 utilise les fonctions de l'étape 2.
 
 ---
 
-## 4. Mise en route (5 minutes)
+## 4. Mise en route
 
 ### 4.1 Pourquoi un serveur local est nécessaire
 
@@ -433,6 +433,20 @@ Prochaine chose a faire : Error : etape 1 : le constructeur de Commande
 Les 43 tests échouent, et la page du jeu affiche une erreur nommant la première
 fonction manquante. C'est normal, c'est le point de départ. Si c'est ce que vous
 voyez, votre environnement fonctionne et vous pouvez commencer.
+
+### 4.4 Sans rien installer
+
+Si vous ne pouvez pas lancer de serveur local, sur une machine de l'école par
+exemple, la page `verifier.html` fait le travail : vous y déposez vos fichiers
+`modeles.js`, `algos.js` et `jeu.js`, les 43 tests s'exécutent contre votre
+code, et un bouton lance la partie avec vos fonctions.
+
+Tout se passe dans votre navigateur : votre code n'est ni envoyé au serveur, ni
+enregistré quelque part. Pensez seulement à recharger vos fichiers après chaque
+modification, la page ne les surveille pas toute seule.
+
+Cette page dépanne, elle ne remplace pas le serveur local : vous travaillez plus
+vite avec votre éditeur, `npm test` dans un terminal et le jeu dans un onglet.
 
 ---
 
@@ -553,7 +567,7 @@ documentation sont en français accentué.
 
 ---
 
-## 7. Étape 1 : les modèles (1 h 15)
+## 7. Étape 1 : les modèles
 
 **Fichier** : `src/modeles.js`. **Tests** : `tests/test_1_modeles.js`, 15 tests.
 
@@ -653,7 +667,7 @@ Faites un commit.
 
 ---
 
-## 8. Étape 2 : les algorithmes (2 h)
+## 8. Étape 2 : les algorithmes
 
 **Fichier** : `src/algos.js`. **Tests** : `tests/test_2_algos.js`, 13 tests.
 
@@ -793,7 +807,7 @@ commit.
 
 ---
 
-## 9. Étape 3 : le réseau et la partie (1 h 45)
+## 9. Étape 3 : le réseau et la partie
 
 **Fichier** : `src/jeu.js`. **Tests** : `tests/test_3_jeu.js`, 15 tests.
 
@@ -906,7 +920,7 @@ le jeu se joue en entier dans le navigateur, jusqu'au message
 
 ---
 
-## 10. Étape 4 : vos propres tests (30 min)
+## 10. Étape 4 : vos propres tests
 
 **Fichier** : `tests/test_4_les_votres.js`.
 
