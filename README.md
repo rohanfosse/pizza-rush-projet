@@ -12,6 +12,7 @@ qu'elle est rapide.
 | Page | A quoi elle sert |
 | --- | --- |
 | `index.html` | le sujet complet : les regles, les quatre etapes, les ressources |
+| `demonstration.html` | le service de reference rejoue tour par tour, pour voir le resultat attendu |
 | `jeu.html` | le jeu : la carte, les coursiers, le journal du service |
 | `tests.html` | les 43 tests dans le navigateur |
 
@@ -26,6 +27,7 @@ Le sujet existe aussi en texte, pour le lire directement sur GitHub :
 Publie avec GitHub Pages, rien a installer pour regarder :
 
 - [le sujet](https://rohanfosse.github.io/pizza-rush-projet/)
+- [la demonstration](https://rohanfosse.github.io/pizza-rush-projet/demonstration.html)
 - [le jeu](https://rohanfosse.github.io/pizza-rush-projet/jeu.html)
 - [les tests](https://rohanfosse.github.io/pizza-rush-projet/tests.html)
 

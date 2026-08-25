@@ -47,11 +47,12 @@ jusqu'au message `Service termine`.
    `43 tests, tout est vert.` et que le service se joue en entier dans le
    navigateur.
 
-**Les quatre pages du projet**, qui partagent la même feuille de style :
+**Les cinq pages du projet**, qui partagent la même feuille de style :
 
 | Page | À quoi elle sert |
 | --- | --- |
 | `index.html` | ce sujet, la page d'accueil |
+| `demonstration.html` | le service de référence rejoué tour par tour : 81 tours, 18 livraisons, 720 points, le résultat que votre code doit reproduire |
 | `jeu.html` | le jeu : la carte, les coursiers, le journal du service. Tant qu'une fonction n'est pas écrite, le journal affiche son nom |
 | `tests.html` | les 43 tests dans le navigateur. Le premier test rouge est votre prochaine étape |
 | `verifier.html` | vos fichiers déposés dans la page, les 43 tests exécutés contre votre code, sans rien installer |
@@ -349,6 +350,7 @@ arrivé ».
 ```text
 pizza-rush/
     index.html                FOURNI  le sujet, la page d'accueil
+    demonstration.html        FOURNI  le service de reference, rejoue
     jeu.html                  FOURNI  le jeu
     tests.html                FOURNI  les tests dans le navigateur
     verifier.html             FOURNI  vos fichiers testes en ligne
@@ -357,6 +359,7 @@ pizza-rush/
     donnees/
         quartier.json         FOURNI  le plan du quartier
         commandes.json        FOURNI  le carnet de commandes du service
+        demonstration.json    FOURNI  l'enregistrement du service de reference
     src/
         modeles.js         <- A ECRIRE   etape 1
         algos.js           <- A ECRIRE   etape 2
