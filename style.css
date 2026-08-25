@@ -1263,3 +1263,69 @@ button.discret-bouton {
   border-radius: 3px;
   background: var(--papier);
 }
+
+/* ------------------------------------------- le commentaire de la demonstration */
+
+main.avec-explications {
+  grid-template-columns: minmax(0, 3fr) minmax(320px, 2fr);
+}
+
+.colonne {
+  display: grid;
+  gap: 20px;
+  align-items: start;
+}
+
+.rappel {
+  font-size: 0.86rem;
+  color: var(--discret);
+  margin: 0 0 12px;
+  max-width: 78ch;
+}
+
+.explications {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1px;
+  background: var(--filet);
+  border: 1px solid var(--filet);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.explications li {
+  background: var(--surface);
+  padding: 11px 14px;
+  margin: 0;
+}
+
+.explications .fonction {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--vert);
+  display: block;
+  margin-bottom: 3px;
+}
+
+.explications p {
+  margin: 0;
+  font-size: 0.92rem;
+}
+
+.position {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--discret);
+  align-self: center;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 1000px) {
+  main.avec-explications {
+    grid-template-columns: 1fr;
+  }
+}

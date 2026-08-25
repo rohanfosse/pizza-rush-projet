@@ -40,7 +40,7 @@
 
       <div id="score" class="score"></div>
 
-      <main>
+      <main class="avec-explications">
         <section class="panneau carte-panneau">
           <h2>Le quartier <span id="nom-quartier" class="discret"></span></h2>
           <div id="carte" class="carte"></div>
@@ -58,13 +58,27 @@
           </p>
         </section>
 
-        <section class="panneau">
-          <h2>Les coursiers</h2>
-          <ul id="coursiers" class="liste coursiers"></ul>
+        <div class="colonne">
+          <section class="panneau">
+            <h2>Les coursiers</h2>
+            <ul id="coursiers" class="liste coursiers"></ul>
 
-          <h2>En attente</h2>
-          <ul id="commandes" class="liste commandes"></ul>
-        </section>
+            <h2>En attente</h2>
+            <ul id="commandes" class="liste commandes"></ul>
+          </section>
+
+          <section class="panneau">
+            <h2>Ce que votre code vient de faire</h2>
+            <p class="rappel">
+              À chaque tour : <code>ajouterCommande</code> met les nouvelles commandes en file,
+              <code>assigner</code> fait partir les coursiers en s'appuyant sur
+              <code>coursierLePlusProche</code>, <code>itineraire</code> et <code>charger</code>,
+              puis <code>avancer</code> déplace tout le monde et déclenche <code>livrer</code> et
+              <code>points</code>.
+            </p>
+            <ol id="explications" class="explications"></ol>
+          </section>
+        </div>
       </main>
 
       <section class="panneau journal-panneau">
@@ -96,6 +110,7 @@
       const boutonTour = document.querySelector("#un-tour");
       const boutonRecommencer = document.querySelector("#recommencer");
       const position = document.querySelector("#position");
+      const explications = document.querySelector("#explications");
 
       const quartier = await (await fetch("donnees/quartier.json")).json();
       const enregistrement = await (await fetch("donnees/demonstration.json")).json();
@@ -165,11 +180,27 @@
           for (const ligne of image.journal) vue.noter(ligne, classeDeLigne(ligne));
         }
         vue.rafraichir(partie(image));
+        expliquer(image);
         position.textContent = `tour ${image.tick} sur ${enregistrement.tours}`;
         const finie = courante === images.length - 1;
         boutonJouer.disabled = finie;
         boutonTour.disabled = finie;
         if (finie) pause();
+      }
+
+      /** Le commentaire du tour courant : quelle fonction a fait quoi. */
+      function expliquer(image) {
+        explications.replaceChildren();
+        for (const explication of image.explications) {
+          const item = document.createElement("li");
+          const fonction = document.createElement("span");
+          fonction.className = "fonction";
+          fonction.textContent = explication.fonction;
+          const texte = document.createElement("p");
+          texte.textContent = explication.texte;
+          item.append(fonction, texte);
+          explications.append(item);
+        }
       }
 
       function unTour() {

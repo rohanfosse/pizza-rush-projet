@@ -52,7 +52,7 @@ jusqu'au message `Service termine`.
 | Page | À quoi elle sert |
 | --- | --- |
 | `index.html` | ce sujet, la page d'accueil |
-| `demonstration.html` | le service de référence rejoué tour par tour : 81 tours, 18 livraisons, 720 points, le résultat que votre code doit reproduire |
+| `demonstration.html` | le service de référence rejoué tour par tour, avec à chaque tour le commentaire de ce que fait le code que vous écrivez : 81 tours, 18 livraisons, 720 points |
 | `jeu.html` | le jeu : la carte, les coursiers, le journal du service. Tant qu'une fonction n'est pas écrite, le journal affiche son nom |
 | `tests.html` | les 43 tests dans le navigateur. Le premier test rouge est votre prochaine étape |
 | `verifier.html` | vos fichiers déposés dans la page, les 43 tests exécutés contre votre code, sans rien installer |
