@@ -1,0 +1,455 @@
+/* Pizza Rush, la feuille de style. Fournie : jouez avec si l'envie vous prend. */
+
+:root {
+  --papier: #fbfbf8;
+  --surface: #ffffff;
+  --surface-creuse: #f4f4ee;
+  --encre: #1e2420;
+  --discret: #5b6560;
+  --filet: #dcddd5;
+
+  --vert: #2f6b4f;
+  --vert-clair: #5c8f72;
+  --vert-pale: #e7efe8;
+  --mur: #c7ccc4;
+  --alerte: #9a4b32;
+
+  --rayon: 6px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0 auto;
+  padding: 28px 20px 48px;
+  max-width: 1100px;
+  background: var(--papier);
+  color: var(--encre);
+  font: 17px/1.55 Georgia, "Iowan Old Style", "Times New Roman", serif;
+}
+
+header {
+  border-bottom: 2px solid var(--encre);
+  padding-bottom: 14px;
+  margin-bottom: 22px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.9rem;
+  letter-spacing: -0.01em;
+}
+
+.sous-titre {
+  margin: 4px 0 0;
+  color: var(--discret);
+  font-size: 0.95rem;
+}
+
+h2 {
+  margin: 0 0 10px;
+  font-size: 0.72rem;
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--discret);
+  font-weight: 600;
+}
+
+.discret {
+  color: var(--discret);
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+
+/* ---------------------------------------------------------- les compteurs */
+
+.score {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 1px;
+  background: var(--filet);
+  border: 1px solid var(--filet);
+  border-radius: var(--rayon);
+  overflow: hidden;
+  margin-bottom: 22px;
+}
+
+.compteur {
+  background: var(--surface);
+  padding: 12px 16px;
+}
+
+.compteur .valeur {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.compteur .libelle {
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--discret);
+}
+
+/* ------------------------------------------------------- la mise en page */
+
+main {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(250px, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  main {
+    grid-template-columns: 1fr;
+  }
+}
+
+.panneau {
+  background: var(--surface);
+  border: 1px solid var(--filet);
+  border-radius: var(--rayon);
+  padding: 16px;
+}
+
+/* ------------------------------------------------------------- la carte */
+
+.carte {
+  display: grid;
+  grid-template-columns: repeat(var(--largeur, 14), 1fr);
+  gap: 1px;
+  background: var(--filet);
+  border: 1px solid var(--filet);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.case {
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  background: var(--surface-creuse);
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-size: clamp(10px, 1.7vw, 15px);
+  font-weight: 700;
+  color: var(--discret);
+}
+
+.case.mur {
+  background: var(--mur);
+}
+
+.case.chemin {
+  background: var(--vert-pale);
+}
+
+.case.pizzeria {
+  background: var(--vert);
+  color: #ffffff;
+}
+
+.case.client {
+  background: var(--surface);
+  box-shadow: inset 0 0 0 2px var(--vert);
+  color: var(--vert);
+}
+
+.case.coursier {
+  background: var(--vert-clair);
+  color: #ffffff;
+}
+
+/* ----------------------------------------------------------- les boutons */
+
+.commandes-barre {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+button {
+  font: inherit;
+  font-size: 0.92rem;
+  color: var(--encre);
+  background: var(--surface);
+  border: 1px solid var(--filet);
+  border-radius: 4px;
+  padding: 8px 18px;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  border-color: var(--vert);
+  color: var(--vert);
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+button.principal {
+  background: var(--vert);
+  border-color: var(--vert);
+  color: #ffffff;
+}
+
+button.principal:hover:not(:disabled) {
+  background: #275a43;
+  color: #ffffff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--vert);
+  outline-offset: 2px;
+}
+
+.legende {
+  margin: 14px 0 0;
+  font-size: 0.82rem;
+  color: var(--discret);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  align-items: center;
+}
+
+.pastille {
+  display: inline-grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 3px;
+  margin-right: 4px;
+  background: var(--surface-creuse);
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.pastille.pizzeria {
+  background: var(--vert);
+  color: #ffffff;
+}
+
+.pastille.coursier {
+  background: var(--vert-clair);
+  color: #ffffff;
+}
+
+.pastille.client {
+  background: var(--surface);
+  box-shadow: inset 0 0 0 2px var(--vert);
+  color: var(--vert);
+}
+
+.pastille.mur {
+  background: var(--mur);
+}
+
+/* ------------------------------------------------------------ les listes */
+
+.liste {
+  list-style: none;
+  margin: 0 0 22px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.liste li {
+  padding: 9px 0;
+  font-size: 0.88rem;
+  border-bottom: 1px solid var(--filet);
+}
+
+.liste li:last-child {
+  border-bottom: 0;
+}
+
+.coursiers li {
+  padding-left: 10px;
+  border-left: 3px solid transparent;
+}
+
+.coursiers li.libre {
+  border-left-color: var(--filet);
+}
+
+.coursiers li.occupe {
+  border-left-color: var(--vert);
+}
+
+.liste .symbole {
+  display: inline-grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 3px;
+  background: var(--vert-clair);
+  color: #ffffff;
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-size: 11px;
+  font-weight: 700;
+  margin-right: 8px;
+  vertical-align: -4px;
+}
+
+.liste .nom {
+  font-weight: 700;
+  margin-right: 8px;
+}
+
+.liste .detail {
+  color: var(--discret);
+}
+
+.liste .pizzas {
+  display: block;
+  color: var(--vert);
+  font-size: 0.8rem;
+  margin-top: 2px;
+}
+
+.liste li.vide {
+  color: var(--discret);
+  font-style: italic;
+}
+
+/* ------------------------------------------------------------ le journal */
+
+.journal-panneau {
+  margin-top: 20px;
+}
+
+.journal {
+  max-height: 230px;
+  overflow-y: auto;
+  font-size: 0.86rem;
+}
+
+.journal p {
+  margin: 0;
+  padding: 5px 0 5px 10px;
+  border-left: 3px solid var(--filet);
+}
+
+.journal .livraison {
+  border-left-color: var(--vert);
+  color: var(--vert);
+}
+
+.journal .arrivee {
+  border-left-color: var(--vert-clair);
+}
+
+.journal .affectation {
+  border-left-color: var(--mur);
+  color: var(--discret);
+}
+
+.journal .erreur {
+  border-left-color: var(--alerte);
+  color: var(--alerte);
+}
+
+.journal .fin {
+  font-weight: 700;
+  border-left-color: var(--encre);
+}
+
+footer {
+  margin-top: 26px;
+  padding-top: 14px;
+  border-top: 1px solid var(--filet);
+  font-size: 0.85rem;
+  color: var(--discret);
+}
+
+footer a {
+  color: var(--vert);
+}
+
+/* -------------------------------------------------------- page des tests */
+
+.resultats {
+  font-size: 0.9rem;
+}
+
+.resultats .suite-titre {
+  margin: 22px 0 8px;
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--discret);
+  font-weight: 600;
+}
+
+.resultats .test {
+  padding: 6px 0 6px 12px;
+  border-left: 3px solid var(--filet);
+  border-bottom: 1px solid var(--filet);
+}
+
+.resultats .test .etat {
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-right: 10px;
+}
+
+.resultats .test.ok {
+  border-left-color: var(--vert);
+}
+
+.resultats .test.ok .etat {
+  color: var(--vert);
+}
+
+.resultats .test.ko {
+  border-left-color: var(--alerte);
+}
+
+.resultats .test.ko .etat {
+  color: var(--alerte);
+}
+
+.resultats .message {
+  display: block;
+  color: var(--alerte);
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-size: 0.78rem;
+  margin-top: 4px;
+}
+
+.bilan {
+  font-size: 1.05rem;
+  font-weight: 700;
+  padding: 12px 16px;
+  border-radius: var(--rayon);
+  background: var(--surface-creuse);
+  border-left: 4px solid var(--filet);
+}
+
+.bilan.tout-vert {
+  color: var(--vert);
+  border-left-color: var(--vert);
+  background: var(--vert-pale);
+}
+
+.bilan.des-rouges {
+  color: var(--alerte);
+  border-left-color: var(--alerte);
+}

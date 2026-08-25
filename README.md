@@ -1,0 +1,67 @@
+# Pizza Rush
+
+Jeu de livraison de pizzas fonctionnant dans un navigateur, en HTML, CSS et
+JavaScript, sans bibliotheque exterieure. Projet d'apprentissage individuel de
+cinq a six heures.
+
+Le jeu en une phrase : des clients commandent des pizzas, vos coursiers partent
+de la pizzeria et les livrent, et une livraison rapporte d'autant plus de points
+qu'elle est rapide.
+
+**Le sujet complet, avec les regles du jeu et les ressources : [SUJET.md](SUJET.md).**
+
+## Recuperer le projet
+
+```bash
+git clone https://github.com/rohanfosse/pizza-rush-projet.git
+cd pizza-rush-projet
+```
+
+## Lancer le projet
+
+Un serveur local est necessaire : un navigateur refuse de charger des modules
+JavaScript depuis une adresse `file://`.
+
+```bash
+python -m http.server 8000     # ou : npx serve
+```
+
+Le jeu est disponible sur `http://localhost:8000`, les tests sur
+`http://localhost:8000/tests.html`.
+
+Avec Node, les tests s'executent aussi en console :
+
+```bash
+npm test
+```
+
+Au premier lancement, les 43 tests echouent : c'est le point de depart.
+
+## Ce qu'il y a a ecrire
+
+Le squelette est fourni : toutes les fonctions existent, documentees, avec un
+`// TODO` a la place du code. Pour voir ce qu'il reste a faire :
+
+```bash
+grep -rn "TODO" src/ tests/test_4_les_votres.js
+```
+
+| Etape | Fichier a ecrire | Notions | Tests | Duree |
+| --- | --- | --- | --- | --- |
+| 1 | `src/modeles.js` | classes, heritage, validation | 15 | 1 h 15 |
+| 2 | `src/algos.js` | grille, parcours en largeur, choix du coursier | 13 | 2 h |
+| 3 | `src/jeu.js` | fetch, codes HTTP, regles du jeu | 15 | 1 h 45 |
+| 4 | `tests/test_4_les_votres.js` | ecriture de tests | 2 minimum | 30 min |
+
+`src/vue.js` et `src/main.js` sont fournis : ils constituent la vue et le
+controleur, le reste du projet formant le modele. Les tests fournis ne se
+modifient pas.
+
+## Le projet est fini quand
+
+- `npm test` affiche `43 tests, tout est vert.`,
+- le service se joue jusqu'au message `Service termine` dans le navigateur,
+- `tests/test_4_les_votres.js` contient au moins deux tests a vous.
+
+La liste complete du rendu attendu se trouve en section 12 de
+[SUJET.md](SUJET.md).

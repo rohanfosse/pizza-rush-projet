@@ -1,0 +1,11 @@
+{
+  "name": "pizza-rush",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Un jeu de livraison de pizzas dans le navigateur, en HTML/CSS/JS sans framework.",
+  "type": "module",
+  "scripts": {
+    "test": "node tests/lancer-node.js",
+    "serveur": "python -m http.server 8000"
+  }
+}
