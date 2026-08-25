@@ -18,6 +18,35 @@ et un dépôt Git avec un commit par étape.
 `43 tests, tout est vert.` et le service se joue en entier dans le navigateur,
 jusqu'au message `Service termine`.
 
+## La marche à suivre
+
+1. **Récupérez le projet.**
+
+   ```bash
+   git clone https://github.com/rohanfosse/pizza-rush-projet.git
+   cd pizza-rush-projet
+   ```
+
+   Sans Git : [téléchargez le ZIP](https://github.com/rohanfosse/pizza-rush-projet/archive/refs/heads/main.zip)
+   et décompressez-le. Le dépôt est ici :
+   <https://github.com/rohanfosse/pizza-rush-projet>.
+
+2. **Ouvrez-le.** Dans le dossier du projet, lancez `python -m http.server 8000`,
+   puis allez sur `http://localhost:8000`. Les 43 tests sont rouges et le jeu
+   affiche une erreur : c'est le point de départ normal.
+
+3. **Écrivez le code manquant**, dans cet ordre : `src/modeles.js`, puis
+   `src/algos.js`, puis `src/jeu.js`. Chaque endroit à compléter porte un
+   `// TODO`. Vous ne créez aucun fichier, vous n'en renommez aucun, et vous ne
+   changez aucune signature de fonction.
+
+4. **Ajoutez vos propres tests** dans `tests/test_4_les_votres.js`, deux au
+   minimum.
+
+5. **Rendez votre dépôt** lorsque `npm test` affiche
+   `43 tests, tout est vert.` et que le service se joue en entier dans le
+   navigateur.
+
 **Les quatre pages du projet**, qui partagent la même feuille de style :
 
 | Page | À quoi elle sert |
@@ -224,6 +253,11 @@ les pizzas à la pizzeria. Son **itinéraire** est donc en deux morceaux mis bou
 position du coursier  ->  pizzeria  ->  client
 ```
 
+Le passage à la pizzeria ne coupe pas le déplacement : l'itinéraire est un seul
+chemin, du coursier au client en passant par la pizzeria. Un scooter qui atteint
+la pizzeria alors qu'il lui reste deux cases à parcourir ce tour-là continue
+immédiatement vers le client.
+
 Pour une commande en attente, **c'est le coursier libre le plus proche qui
 part** : celui dont l'itinéraire compte le moins de cases. Un scooter rapide
 mais à l'autre bout du quartier perd donc contre un vélo déjà sur place.
@@ -338,25 +372,28 @@ pizza-rush/
         lancer-node.js        FOURNI  lance les tests en console
 ```
 
-Quatre fichiers à modifier, pas un de plus. Les tests fournis ne doivent pas
-être modifiés : ils sont l'énoncé. Si vous pensez avoir trouvé une erreur dans
-un test fourni, signalez-la, ne la corrigez pas.
+| Fichiers | Ce que vous en faites |
+| --- | --- |
+| `src/modeles.js`, `src/algos.js`, `src/jeu.js` | vous les complétez : c'est tout le travail |
+| `tests/test_4_les_votres.js` | vous y ajoutez au moins deux tests |
+| `tests/test_1`, `test_2`, `test_3`, `tests/mini.js` | vous n'y touchez jamais : ce sont l'énoncé |
+| `src/vue.js`, `src/main.js`, les pages, `style.css`, `donnees/` | vous les lisez, vous ne les modifiez pas |
+
+Quatre fichiers à modifier, pas un de plus. Aucun fichier à créer, aucun nom à
+changer : les tests importent ces chemins exacts, et votre code cessera d'être
+trouvé si vous déplacez quoi que ce soit. Si vous pensez avoir trouvé une erreur
+dans un test fourni, signalez-la, ne la corrigez pas.
 
 ### 3.2 Le squelette
 
 Les trois fichiers à écrire sont déjà fournis, remplis, mais vides de logique.
 Chaque fonction existe, avec son nom exact, ses paramètres, et un commentaire
-qui dit précisément ce qu'elle doit faire. Le corps ne contient que deux
-lignes :
+qui dit ce qu'elle doit renvoyer et quelles erreurs elle doit lever. La méthode,
+elle, est dans ce sujet : le squelette pose le contrat, il ne fait pas le
+travail. Le corps ne contient que deux lignes :
 
 ```js
-/**
- * La clé texte d'une position, "x,y".
- *
- * Pourquoi : deux objets {x: 1, y: 2} différents ne sont jamais égaux pour
- * un Set ou une Map, alors que deux chaînes "1,2" le sont. On passe donc par
- * une clé texte pour savoir si une case a déjà été visitée.
- */
+/** La cle texte d'une position : {x: 3, y: 7} donne "3,7". */
 export function cle(position) {
   // TODO etape 2 : ecrire cle
   throw new Error("etape 2 : cle");
@@ -986,6 +1023,10 @@ score dans `vue.js`. Dans les deux cas, le code est au mauvais endroit.
 ## 12. Ce qui est attendu au rendu
 
 ### 12.1 La liste de vérification
+
+Vous rendez le dépôt que vous avez récupéré, avec la même structure de dossiers,
+vos quatre fichiers complétés et votre historique de commits. Rien à renommer,
+rien à déplacer, rien à zipper autrement.
 
 - [ ] Les 43 tests fournis passent, sans qu'aucun test fourni ait été modifié.
 - [ ] Le jeu se joue entièrement dans le navigateur, jusqu'au message de fin de

@@ -11,10 +11,7 @@
       href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link
-      rel="icon"
-      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='5' fill='%232f6b4f'/><text x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-size='20' fill='%23ffffff'>P</text></svg>"
-    />
+    <link rel="icon" href="icone.svg" type="image/svg+xml" />
   </head>
   <body class="page-sujet">
     <header class="barre">
@@ -52,6 +49,37 @@
     <div><dt>Fichiers à écrire</dt><dd>4</dd></div>
     <div><dt>Dépendances</dt><dd>Aucune</dd></div>
   </dl>
+
+  <h2>La marche à suivre</h2>
+  <ol class="regles">
+    <li>
+      <b>Récupérez le projet.</b>
+      <code>git clone https://github.com/rohanfosse/pizza-rush-projet.git</code>, ou
+      <a href="https://github.com/rohanfosse/pizza-rush-projet/archive/refs/heads/main.zip">téléchargez
+      le ZIP</a> et décompressez-le. Le dépôt est ici :
+      <a href="https://github.com/rohanfosse/pizza-rush-projet">github.com/rohanfosse/pizza-rush-projet</a>.
+    </li>
+    <li>
+      <b>Ouvrez-le.</b> Dans le dossier du projet, lancez
+      <code>python -m http.server 8000</code>, puis allez sur
+      <code>http://localhost:8000</code>. Les 43 tests sont rouges et le jeu affiche une erreur :
+      c'est le point de départ normal.
+    </li>
+    <li>
+      <b>Écrivez le code manquant</b>, dans cet ordre : <code>src/modeles.js</code>, puis
+      <code>src/algos.js</code>, puis <code>src/jeu.js</code>. Chaque endroit à compléter porte un
+      <code>// TODO</code>. Vous ne créez aucun fichier, vous n'en renommez aucun, et vous ne
+      changez aucune signature de fonction.
+    </li>
+    <li>
+      <b>Ajoutez vos propres tests</b> dans <code>tests/test_4_les_votres.js</code>, deux au
+      minimum.
+    </li>
+    <li>
+      <b>Rendez votre dépôt</b> lorsque <code>npm test</code> affiche
+      <code>43 tests, tout est vert.</code> et que le service se joue en entier dans le navigateur.
+    </li>
+  </ol>
 
   <div class="encadre">
     <span class="titre">Le projet est fini quand</span>
@@ -369,6 +397,11 @@
     </p>
     <pre><code>position du coursier  ->  pizzeria  ->  client</code></pre>
     <p>
+      Le passage à la pizzeria ne coupe pas le déplacement : l'itinéraire est un seul chemin, du
+      coursier au client en passant par la pizzeria. Un scooter qui atteint la pizzeria alors qu'il
+      lui reste deux cases à parcourir ce tour-là continue immédiatement vers le client.
+    </p>
+    <p>
       Pour une commande en attente, <b>c'est le coursier libre le plus proche qui part</b> : celui
       dont l'itinéraire compte le moins de cases. Un scooter rapide mais à l'autre bout du quartier
       perd donc contre un vélo déjà sur place.
@@ -543,25 +576,49 @@ points = (30 - delai) x nombre de pizzas, et jamais moins de zero</code></pre>
         test_3_jeu.js         FOURNI  15 tests
         test_4_les_votres.js  &lt;- A ECRIRE   etape 4
         lancer-node.js        FOURNI  lance les tests en console</code></pre>
+    <div class="tableau">
+      <table>
+        <thead>
+          <tr>
+            <th>Fichiers</th>
+            <th>Ce que vous en faites</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="mono">src/modeles.js, src/algos.js, src/jeu.js</td>
+            <td>vous les complétez : c'est tout le travail</td>
+          </tr>
+          <tr>
+            <td class="mono">tests/test_4_les_votres.js</td>
+            <td>vous y ajoutez au moins deux tests</td>
+          </tr>
+          <tr>
+            <td class="mono">tests/test_1, test_2, test_3, tests/mini.js</td>
+            <td>vous n'y touchez jamais : ce sont l'énoncé</td>
+          </tr>
+          <tr>
+            <td class="mono">src/vue.js, src/main.js, les pages, style.css, donnees/</td>
+            <td>vous les lisez, vous ne les modifiez pas</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <p>
-      Quatre fichiers à modifier, pas un de plus. Les tests fournis ne doivent pas être modifiés :
-      ils sont l'énoncé. Si vous pensez avoir trouvé une erreur dans un test fourni, signalez-la, ne
-      la corrigez pas.
+      Quatre fichiers à modifier, pas un de plus. Aucun fichier à créer, aucun nom à changer : les
+      tests importent ces chemins exacts, et votre code cessera d'être trouvé si vous déplacez quoi
+      que ce soit. Si vous pensez avoir trouvé une erreur dans un test fourni, signalez-la, ne la
+      corrigez pas.
     </p>
 
     <h3>Le squelette</h3>
     <p>
       Les trois fichiers à écrire sont déjà fournis, remplis, mais vides de logique. Chaque fonction
-      existe, avec son nom exact, ses paramètres, et un commentaire qui dit précisément ce qu'elle
-      doit faire. Le corps ne contient que deux lignes :
+      existe, avec son nom exact, ses paramètres, et un commentaire qui dit ce qu'elle doit
+      renvoyer et quelles erreurs elle doit lever. La méthode, elle, est dans ce sujet : le
+      squelette pose le contrat, il ne fait pas le travail. Le corps ne contient que deux lignes :
     </p>
-    <pre><code>/**
- * La cle texte d'une position, "x,y".
- *
- * Pourquoi : deux objets {x: 1, y: 2} differents ne sont jamais egaux pour
- * un Set ou une Map, alors que deux chaines "1,2" le sont. On passe donc par
- * une cle texte pour savoir si une case a deja ete visitee.
- */
+    <pre><code>/** La cle texte d'une position : {x: 3, y: 7} donne "3,7". */
 export function cle(position) {
   // TODO etape 2 : ecrire cle
   throw new Error("etape 2 : cle");
@@ -1581,6 +1638,11 @@ await assert.rejects(chargerJson("nulle-part.json", fauxFetch(404, {})), /404/);
   <!-- -------------------------------------------------------------- 12 -->
   <section id="s12">
     <h2><span class="n">12</span><span>Ce qui est attendu au rendu</span></h2>
+    <p>
+      Vous rendez le dépôt que vous avez récupéré, avec la même structure de dossiers, vos quatre
+      fichiers complétés et votre historique de commits. Rien à renommer, rien à déplacer, rien à
+      zipper autrement.
+    </p>
     <ul class="verif">
       <li>Les 43 tests fournis passent, sans qu'aucun test fourni ait été modifié.</li>
       <li>Le jeu se joue entièrement dans le navigateur, jusqu'au message de fin de service.</li>

@@ -1,17 +1,15 @@
 /**
  * Étape 1 : les modèles.
  *
- * Ce qui existe dans le jeu : des commandes et des coursiers. Rien ici ne
- * connaît l'écran ni la carte : ce sont des objets simples, faciles à tester.
+ * Les objets du jeu : une commande, un coursier, et deux types de coursiers.
+ * Rien ici ne connaît la carte ni l'écran.
  *
  * Vocabulaire :
- *   une position  est un objet {x, y} (x = colonne, y = ligne, depuis 0)
- *   un chemin     est une liste de positions à parcourir
+ *   une position  un objet {x, y}, x = colonne, y = ligne, depuis 0
+ *   un chemin     une liste de positions à parcourir
  *
- * Règle de l'atelier : un constructeur vérifie ce qu'on lui donne et lève
- * une Error avec un message lisible si ça ne va pas.
- *
- * Le test qui va avec : tests/test_1_modeles.js
+ * Les détails sont en section 7 du sujet. Les tests qui vont avec :
+ * tests/test_1_modeles.js
  */
 
 /** Vrai si `position` est bien un {x, y} avec deux entiers positifs. Fournie. */
@@ -29,15 +27,11 @@ export function estUnePosition(position) {
 export class Commande {
   /**
    * id           entier strictement positif
-   * destination  une position {x, y}
-   * pizzas       tableau non vide de noms de pizzas
-   * creeeAu      le tour où la commande est arrivée (0 par défaut)
+   * destination  une position {x, y}, COPIÉE
+   * pizzas       tableau non vide de noms de pizzas, COPIÉ
+   * creeeAu      le tour d'arrivée de la commande, 0 par défaut
    *
-   * Range tout ça dans this.id, this.destination, this.pizzas, this.creeeAu,
-   * et met this.livreeAu à null (elle n'est pas encore livrée).
-   *
-   * La destination et la liste de pizzas sont COPIÉES : modifier ce qu'on a
-   * passé au constructeur ne doit pas modifier la commande.
+   * Range aussi this.livreeAu à null : elle n'est pas encore livrée.
    * Lève une Error si l'id, la destination ou la liste de pizzas ne va pas.
    */
   constructor(id, destination, pizzas, creeeAu = 0) {
@@ -51,7 +45,7 @@ export class Commande {
     throw new Error("etape 1 : Commande.nbPizzas");
   }
 
-  /** Par exemple : "Commande #3 : 2 pizzas pour (4, 7)" (et "1 pizza" au singulier). */
+  /** Exactement : "Commande #3 : 2 pizzas pour (4, 7)", et "1 pizza" au singulier. */
   toString() {
     // TODO etape 1 : ecrire Commande.toString
     throw new Error("etape 1 : Commande.toString");
@@ -61,19 +55,17 @@ export class Commande {
 export class Coursier {
   /**
    * nom       chaîne non vide
-   * position  une position {x, y}, copiée
+   * position  une position {x, y}, COPIÉE
    *
-   * Range this.nom et this.position. Au départ un coursier n'a pas de
-   * commande (this.commande vaut null) et son chemin est vide (this.chemin
-   * vaut []). Lève une Error si le nom ou la position ne va pas.
+   * Au départ, this.commande vaut null et this.chemin vaut [].
+   * Lève une Error si le nom ou la position ne va pas.
    */
   constructor(nom, position) {
     // TODO etape 1 : ecrire le constructeur de Coursier
     throw new Error("etape 1 : le constructeur de Coursier");
   }
 
-  // Ces trois valeurs sont ce que les sous-classes redéfinissent : c'est tout
-  // l'intérêt de l'héritage ici. Un coursier de base va à pied.
+  // Les trois valeurs que les sous-classes redéfinissent.
   get type() {
     return "coursier";
   }
@@ -93,8 +85,8 @@ export class Coursier {
   }
 
   /**
-   * Confie une commande et le chemin à suivre (liste de positions, copiée).
-   * Lève une Error si le coursier livre déjà (message contenant "deja").
+   * Confie une commande et le chemin à suivre, COPIÉ.
+   * Lève une Error si le coursier livre déjà, message contenant "deja".
    */
   charger(commande, chemin) {
     // TODO etape 1 : ecrire Coursier.charger
@@ -102,10 +94,10 @@ export class Coursier {
   }
 
   /**
-   * Avance d'au plus `vitesse` cases le long du chemin : chaque case
-   * parcourue devient la nouvelle position et sort du chemin.
-   * Renvoie vrai si le chemin est terminé après ce déplacement (le coursier
-   * est arrivé), faux sinon. Un coursier libre ne bouge pas et renvoie faux.
+   * Avance d'au plus `vitesse` cases le long du chemin. Chaque case parcourue
+   * devient la nouvelle position et sort du chemin.
+   * Renvoie vrai si le chemin est vide après ce déplacement, faux sinon.
+   * Un coursier libre ne bouge pas et renvoie faux.
    */
   avancer() {
     // TODO etape 1 : ecrire Coursier.avancer
@@ -113,37 +105,26 @@ export class Coursier {
   }
 
   /**
-   * Remet la commande au client : le coursier redevient libre et la commande
-   * est renvoyée. Lève une Error s'il n'y a rien à livrer (message contenant
-   * "rien") ou si le chemin n'est pas terminé (message contenant "arrive").
+   * Rend la commande au client, redevient libre, et renvoie cette commande.
+   * Lève une Error s'il n'y a rien à livrer, message contenant "rien", ou si
+   * le chemin n'est pas terminé, message contenant "arrive".
    */
   livrer() {
     // TODO etape 1 : ecrire Coursier.livrer
     throw new Error("etape 1 : Coursier.livrer");
   }
 
-  /** Par exemple : "Ana (velo) en (1, 1)". */
+  /** Exactement : "Ana (velo) en (1, 1)". */
   toString() {
     // TODO etape 1 : ecrire Coursier.toString
     throw new Error("etape 1 : Coursier.toString");
   }
 }
 
-/**
- * Deux cases par tour. Type "velo", lettre "V" sur la carte.
- *
- * Tout le reste (constructeur, charger, avancer, livrer) est hérité de
- * Coursier : il n'y a rien à réécrire, seulement les trois accesseurs à
- * redéfinir.
- */
 export class Velo extends Coursier {
-  // TODO etape 1 : redefinir les trois accesseurs, et rien d'autre.
-  // type "velo", vitesse 2, symbole "V".
-  // charger, avancer et livrer sont herites de Coursier : ne les reecrivez pas.
+  // TODO etape 1 : type "velo", vitesse 2, symbole "V".
 }
 
-/** Trois cases par tour. Type "scooter", lettre "S" sur la carte. */
 export class Scooter extends Coursier {
-  // TODO etape 1 : meme travail que pour Velo.
-  // type "scooter", vitesse 3, symbole "S".
+  // TODO etape 1 : type "scooter", vitesse 3, symbole "S".
 }

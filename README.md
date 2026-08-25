@@ -40,6 +40,9 @@ git clone https://github.com/rohanfosse/pizza-rush-projet.git
 cd pizza-rush-projet
 ```
 
+Sans Git : [telecharger le ZIP](https://github.com/rohanfosse/pizza-rush-projet/archive/refs/heads/main.zip),
+puis decompresser.
+
 ## Lancer le projet
 
 Un serveur local est necessaire : un navigateur refuse de charger des modules
